@@ -12,10 +12,12 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom
 function App() {
   return (
     <Router>
+      <Switch>
+      <Route exact path='/signInUp' component={SignInUp}/>
       <div className="container">
       <LeftBar />
       <div className="content">
-        <Switch>
+        
           <Route exact path='/signInUp' component={SignInUp}/>
           <Route exact path='/home' component={Home}/>
           <Route exact path='/'>
@@ -25,10 +27,10 @@ function App() {
           <Route exact path='/SearchEvents' component={SearchEvents}/>
           <Route exact path='/EventForm' component={EventForm}/>
           <Route exact path='/404' component={Error}/> 
-          <Redirect to='/404' />
-        </Switch>
+        
       </div>
       </div>
+      </Switch>
      
     </Router>
 

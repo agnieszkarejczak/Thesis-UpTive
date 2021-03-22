@@ -4,3 +4,29 @@
     text-align: center;
     background-color:#7B84DB;
   }
+
+.logo{
+  width:8vw;
+  margin-bottom:2em;
+}
+.bar-link{
+  color:rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size:1.5em;
+  
+}
+.bar-ul{
+  list-style-type: none;
+  margin-left:1em;
+  margin-right:1em;
+}
+.bar-ul>li{
+
+  padding: 1em;
+  border-bottom: 0.1em solid rgba(255,255,255,0.2);
+}
+.bar-ul>li:last-child{
+  align-self: flex-end;
+  border-bottom: none;
+
+}
