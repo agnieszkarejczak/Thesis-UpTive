@@ -7,14 +7,14 @@ const HomeHeader = () => {
         <div className='header'>
             <div className='column-header'>
                 <p>IN PROGRESS</p>
-                <Circle/>
+                <Circle borderColor= '#907bdb' color='grey' number={2}/>
             </div>
             <div className='column-header'>
-            <p>IN PROGRESS</p>
-            <Circle/>
+            <p>CALLENDAR</p>
+            <Circle borderColor= '#907bdb' color='grey' number={8}/>
             </div>
             <div className='column-header'>
-            <p>IN PROGRESS</p>
+            <p>RECOMENDED</p>
             <p>Saturday, 20 March
                 <br></br>
                 22:30

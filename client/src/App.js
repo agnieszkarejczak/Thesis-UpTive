@@ -14,22 +14,23 @@ function App() {
     <Router>
       <Switch>
       <Route exact path='/signInUp' component={SignInUp}/>
+      <Route exact path='/404' component={Error}/> 
       <div className="container">
-      <LeftBar />
-      <div className="content">
-        
-          <Route exact path='/signInUp' component={SignInUp}/>
-          <Route exact path='/home' component={Home}/>
-          <Route exact path='/'>
-            <Redirect to='/home'/>
-          </Route>
-          <Route exact path='/profile' component={Profile}/>
-          <Route exact path='/SearchEvents' component={SearchEvents}/>
-          <Route exact path='/EventForm' component={EventForm}/>
-          <Route exact path='/404' component={Error}/> 
+        <LeftBar />
+        <div>
+
+            <Route exact path='/signInUp' component={SignInUp}/>
+            <Route exact path='/home' component={Home}/>
+            <Route exact path='/'>
+              <Redirect to='/home'/>
+            </Route>
+            <Route exact path='/profile' component={Profile}/>
+            <Route exact path='/SearchEvents' component={SearchEvents}/>
+            <Route exact path='/EventForm' component={EventForm}/>
+        </div>
         
       </div>
-      </div>
+      
       </Switch>
      
     </Router>

@@ -9,10 +9,11 @@
   text-align: center;
   width: 100vw;
   height: 100vh;
+  overflow-y:auto;
 }
 
 .content{
-  width: 90vw;
+  width: calc( 100vw - 5em  );
   height: 100vh;
   text-align: center;
 }

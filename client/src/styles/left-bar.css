@@ -1,18 +1,19 @@
 .left-bar{
-    width: 10vw;
+    width:5em;
     height: 100vh;
     text-align: center;
-    background-color:#7B84DB;
+    background-color:#907bdbc9;
   }
 
 .logo{
-  width:8vw;
+  width:4.5em;
+  margin-top:1.5em;
   margin-bottom:2em;
 }
 .bar-link{
-  color:rgba(255,255,255,0.7);
+  color:rgba(255, 255, 255, 0.973);
   text-decoration: none;
-  font-size:1.5em;
+  font-size:1em;
   
 }
 .bar-ul{

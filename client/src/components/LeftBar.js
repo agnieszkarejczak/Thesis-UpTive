@@ -12,11 +12,11 @@ const LeftBar = () => {
                 <i class="fas fa-home"></i>
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     < Link to='/Friends' className='bar-link'>
                         <i class="fas fa-user-friends"></i>
                     </Link>
-                </li>
+                </li> */}
                 <li>< Link to='/SearchEvents' className='bar-link'>
                         <i class="fas fa-search"></i>
                     </Link>
@@ -31,11 +31,11 @@ const LeftBar = () => {
                         <i class="fas fa-door-open"></i>
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     < Link to='/Settings' className='bar-link'>
                     <i class="fas fa-cog"></i>
                     </Link>
-                </li>
+                </li> */}
                 <li>
                     < Link to='/Profile' className='bar-link'>
                         <i class="far fa-user-circle"></i>

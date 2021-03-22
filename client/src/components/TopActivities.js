@@ -1,13 +1,14 @@
 import React from 'react'
-import '../styles/home.css';
+import '../styles/circles.css';
 import Circle from './Circle';
 
-const TopActivities = () => {
+const TopActivities = ({numberOfCircles, color, borderColor, number}) => {
     return (
         <div className='top-activ'>
-            <Circle/>
-            <Circle/>
-            <Circle/>
+            <Circle borderColor={borderColor} color={color} number={number} />
+            <Circle borderColor={borderColor} color={color} number={number} />
+            <Circle borderColor={borderColor} color={color} number={number} />
+
         </div>
     )
 }

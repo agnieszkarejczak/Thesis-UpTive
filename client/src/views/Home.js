@@ -3,6 +3,7 @@ import '../styles/index.css';
 import '../styles/home.css';
 import Events from '../components/Home/Events';
 import EventsCal from '../components/Home/EventsCal';
+import EventSearch from '../components/SearchEvents/EventSearch';
 import HomeHeader from '../components/Home/HomeHeader';
 import TopActivities from '../components/TopActivities';
 /*TODO Popraw routing (signInUp wyświetl bez left bar ale żeby można było przejść stamtąd do home) */
@@ -24,10 +25,17 @@ const Home = () => {
                 </div>
                 <div className='recommended-top-container'>
                     <div className='recommended'>
-                        <Events />
+                        <EventSearch/>
+                        <EventSearch/>
+                        <EventSearch/>
+                        <EventSearch/>
+                        <EventSearch/>
+                        <EventSearch/>
+                        <EventSearch/>
                     </div>
                     <div className='top-activ'>
-                        <TopActivities/>
+                        Top Activities
+                        <TopActivities borderColor= '#907bdb' color='#907bdb' number={3}/>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,102 @@
+.content-profile{
+    flex-direction:row;
+    
+}
+.profile-column{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    min-width: 30em;
+    width: 50vw;
+    padding:1em;
+    overflow-y: auto;
+}
+.profile-column:last-child{
+    background-color: #907bdb;
+    flex-shrink: 2;
+    align-items:flex-start
+}
+
+.avatar-profile{
+    width:15em;
+    height:15em;
+    background-color: white;
+    border-radius: 50%;
+    border:0.2em solid #907bdb;
+}
+.socials-profile{
+    margin:1em;
+    width:6em;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    color:#907bdb;
+    font-size:1.1em;
+}
+
+.label-profile{
+    display:flex;
+    align-self: flex-start;
+    justify-self: flex-start;
+    border-bottom: 0.01em solid #907bdb;
+    width:25em;
+    margin-left: 0.5em;
+    padding-left:0.3em;
+    text-align:left;
+    color:#9064c2;
+}
+.profile-column:last-child > .label-profile{
+    color:white;
+    border-bottom-color: white;
+    margin:1em;
+}
+.bio{
+    padding:1em 0;
+    word-wrap: normal;
+    text-align: left;
+    font-size:0.8em;
+}
+.activity{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin:0.5em 0.5em 0.5em 1em;
+    align-self: flex-start;
+    color: white;
+    font-size:1.2em;
+}
+.activity label{
+    margin-left:1em;
+    margin-right:7em;
+}
+.activity >p{
+    margin-left:0.2em;
+    font-size: 0.5em;
+}
+
+.achievement{
+    display:flex;
+    flex-direction: row;
+    border:0.1em solid white;
+    min-height:5em;
+    width:25em;    
+    border-radius:0.5em;
+    margin:0.5em 1em;
+    color:white;
+}
+.img-achievement{
+    min-height:5em;
+    min-height:5em;
+    width:5em;    
+    border-radius:0 0.5em 0.5em 0;
+    
+}
+.text > label{
+    font-size: 1.1em;
+    margin: 0.1em 0.1em 0.1em 1em;
+}
+.text{
+    text-align: left;
+    width:20em;
+    min-height:5em;
+}

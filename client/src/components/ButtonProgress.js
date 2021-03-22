@@ -1,10 +1,10 @@
 import React from 'react'
 import '../styles/home.css';
 
-const ButtonProgress = () => {
+const ButtonProgress = ({text}) => {
     return (
         <button className='btn-progress'>
-            Accept
+            {text}
         </button>
     )
 }
