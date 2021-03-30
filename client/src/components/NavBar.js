@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import '../styles/left-bar.css';
+import '../styles/nav-bar.css';
 
 const LeftBar = () => {
     return (
-        <div className='left-bar'>
+        <div className='nav-bar'>
             <Link to='/'><img className="logo" src="logo1.png"></img></Link>
             
             <ul className='bar-ul'>
