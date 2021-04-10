@@ -5,7 +5,7 @@ import Error from './views/Error';
 import SearchEvents from './views/SearchEvents';
 import EventForm from './views/EventForm';
 import SignInUp from './views/SignInUp';
-import LeftBar from './components/LeftBar';
+import NavBar from './components/NavBar';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 
 //TODO 404 should be without leftbar etc.
@@ -16,7 +16,7 @@ function App() {
       <Route exact path='/signInUp' component={SignInUp}/>
       <Route exact path='/404' component={Error}/> 
       <div className="container">
-        <LeftBar />
+        <NavBar />
         <div>
 
             <Route exact path='/signInUp' component={SignInUp}/>
