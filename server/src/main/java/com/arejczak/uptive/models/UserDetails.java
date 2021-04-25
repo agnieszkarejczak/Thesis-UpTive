@@ -35,8 +35,8 @@ public class UserDetails {
     @Column(name="bio")
     private String bio;
 
-//    @OneToOne(mappedBy = "userDetails")
-//    private User user;
+    @OneToOne(mappedBy = "userDetails")
+    private User user;
 
     public UserDetails(@NotNull String name, @NotNull String surname, String avatar, String bio) {
         this.name = name;
@@ -46,6 +46,14 @@ public class UserDetails {
     }
 
     public UserDetails() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

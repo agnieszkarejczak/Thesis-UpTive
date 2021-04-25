@@ -36,25 +36,31 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private void addRoles(){
-        roleRepository.save(new Role((long)1,"user"));
-        roleRepository.save(new Role((long)2,"admin"));
+        roleRepository.save(new Role("user"));
+        roleRepository.save(new Role("admin"));
     }
     private void addUsers(){
 
-        userService.addUser(new User("email1","password",roleRepository.findByName("user"), userDetailsRepository.save(new UserDetails("Andrzej","Nowak",null,null))));
-        userService.addUser(new User("email2","password",roleRepository.findByName("user"), userDetailsRepository.save(new UserDetails("Edward","Mak",null,null))));
-        userService.addUser(new User("email3","password",roleRepository.findByName("user"), userDetailsRepository.save(new UserDetails("Kornelia","Kos",null,null))));
-        userService.addUser(new User("admin","admin",roleRepository.findByName("admin"), userDetailsRepository.save(new UserDetails("Alicja","Kowal",null,null))));
+
+
+        userService.addUser(new User("email1","password",roleRepository.findByName("user"), new UserDetails("Artur","Nowak", null, null)));
+        userService.addUser(new User("email2","password",roleRepository.findByName("user"), new UserDetails("Alina","Kos", null, null)));
+        userService.addUser(new User("email3","password",roleRepository.findByName("user"), new UserDetails("Maciej","Anys", null, null)));
+        userService.addUser(new User("email4","password",roleRepository.findByName("admin"),new UserDetails("Krystyna","Mak", null, null)));
+//        try {
+//            userService.addUser(new User("email2","password",roleRepository.findByName("user"), det));
+//        }
+//        catch (Exception e) {
+//            System.out.print(e.getMessage());
+//            System.err.print("key already exists");
+//        }
 
     }
 
-    private void addUserDetails(){
-        userDetailsRepository.save(new UserDetails("Andrzej","Nowak",null,null));
-    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         this.addRoles();
-        this.addUserDetails();
+        this.addUsers();
     }
 }

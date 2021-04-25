@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity()
+@Entity(name="users")
 @Table(
         name="users",
         uniqueConstraints = @UniqueConstraint(
@@ -26,7 +26,7 @@ public class User implements Serializable {
             strategy = SEQUENCE,
             generator = "user_sequence"
     )
-    @Column(name="id_user")
+    @Column(name="id_users")
     private Long id;
 
     @Column(name="email")
@@ -36,7 +36,7 @@ public class User implements Serializable {
     @Column(name="password")
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(
             name="role_id",
             referencedColumnName = "role_id",
@@ -44,7 +44,7 @@ public class User implements Serializable {
     )
     private Role role;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(
             name="user_details_id",
             referencedColumnName = "user_details_id",

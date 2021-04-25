@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="role")
 @Table(
@@ -18,8 +19,14 @@ import static javax.persistence.GenerationType.AUTO;
 public class Role {
 
     @Id
+    @SequenceGenerator(
+            name = "role_sequence",
+            sequenceName = "role_sequence",
+            allocationSize = 1
+    )
     @GeneratedValue(
-            strategy = AUTO
+            strategy = SEQUENCE,
+            generator = "role_sequence"
     )
     @Column(name="role_id")
     private Long id;
@@ -32,8 +39,7 @@ public class Role {
     public Role() {
     }
 
-    public Role(Long id, @NotNull String name) {
-        this.id = id;
+    public Role(@NotNull String name) {
         this.name = name;
     }
 
