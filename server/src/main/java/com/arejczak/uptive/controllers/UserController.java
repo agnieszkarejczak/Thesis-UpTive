@@ -1,5 +1,6 @@
 package com.arejczak.uptive.controllers;
 
+import com.arejczak.uptive.dto.UserRegisterRequestDTO;
 import com.arejczak.uptive.models.UserDetails;
 import com.arejczak.uptive.repositories.RoleRepository;
 import com.arejczak.uptive.models.User;
@@ -29,11 +30,6 @@ public class UserController {
         this.userDetailsRepository = userDetailsRepository;
     }
 
-    @GetMapping("/sth")
-    public ResponseEntity sth(){
-        return new ResponseEntity<>("Some text", HttpStatus.OK);
-    }
-
     @GetMapping({"","/"})
     public ResponseEntity getUsers(){
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
@@ -43,12 +39,9 @@ public class UserController {
     public  ResponseEntity getUser(@PathVariable("id") Long id){
         return  new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
-
-    //Temporaryusers
+    
     @PostMapping("/add")
-    public ResponseEntity  addUser(@RequestBody User user){
+    public ResponseEntity  addUser(@RequestBody UserRegisterRequestDTO user){
         return userService.addUser(user);
     }
-
-
 }

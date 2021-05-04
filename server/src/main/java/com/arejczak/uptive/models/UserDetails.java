@@ -1,7 +1,13 @@
 package com.arejczak.uptive.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -38,14 +44,45 @@ public class UserDetails {
     @OneToOne(mappedBy = "userDetails")
     private User user;
 
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(
+            name = "user_activity",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "activity_id")}
+    )
+    private Set<Activity> userActivities;
+
     public UserDetails(@NotNull String name, @NotNull String surname, String avatar, String bio) {
         this.name = name;
         this.surname = surname;
         this.avatar = avatar;
         this.bio = bio;
+        this.userActivities = new HashSet<>();
     }
 
     public UserDetails() {
+    }
+
+    public void addActivity(Activity activity){
+        this.userActivities.add(activity);
+        activity.getUsers().add(this);
+    }
+
+    public Set<Activity> getUserActivities() {
+        return userActivities;
+    }
+
+    public void setUserActivities(Set<Activity> userActivities) {
+        this.userActivities = userActivities;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {

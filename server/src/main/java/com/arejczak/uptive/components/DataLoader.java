@@ -1,11 +1,10 @@
 package com.arejczak.uptive.components;
 
-import com.arejczak.uptive.models.Role;
-import com.arejczak.uptive.models.User;
-import com.arejczak.uptive.models.UserDetails;
-import com.arejczak.uptive.repositories.RoleRepository;
-import com.arejczak.uptive.repositories.UserDetailsRepository;
-import com.arejczak.uptive.repositories.UserRepository;
+import com.arejczak.uptive.dto.EventAddDTO;
+import com.arejczak.uptive.dto.UserRegisterRequestDTO;
+import com.arejczak.uptive.models.*;
+import com.arejczak.uptive.repositories.*;
+import com.arejczak.uptive.services.EventService;
 import com.arejczak.uptive.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -27,7 +26,19 @@ public class DataLoader implements ApplicationRunner {
     UserService userService;
 
     @Autowired
+    EventService eventService;
+
+    @Autowired
+    EventRepository eventRepository;
+
+    @Autowired
+    LevelRepository  levelRepository;
+
+    @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    ActivityRepository activityRepository;
 
     public DataLoader(UserRepository userRepository, UserService userService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
@@ -39,28 +50,43 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(new Role("user"));
         roleRepository.save(new Role("admin"));
     }
+    private void addActivities(){
+        activityRepository.save(new Activity("Volleyball"));
+        activityRepository.save(new Activity("Swimming"));
+        activityRepository.save(new Activity("Fitness"));
+    }
+    private void addLevels(){
+        levelRepository.save(new Level("LOW"));
+        levelRepository.save(new Level("MEDIUM"));
+        levelRepository.save(new Level("HARD"));
+    }
     private void addUsers(){
-
-
-
-        userService.addUser(new User("email1","password",roleRepository.findByName("user"), new UserDetails("Artur","Nowak", null, null)));
-        userService.addUser(new User("email2","password",roleRepository.findByName("user"), new UserDetails("Alina","Kos", null, null)));
-        userService.addUser(new User("email3","password",roleRepository.findByName("user"), new UserDetails("Maciej","Anys", null, null)));
-        userService.addUser(new User("email4","password",roleRepository.findByName("admin"),new UserDetails("Krystyna","Mak", null, null)));
-//        try {
-//            userService.addUser(new User("email2","password",roleRepository.findByName("user"), det));
-//        }
-//        catch (Exception e) {
-//            System.out.print(e.getMessage());
-//            System.err.print("key already exists");
-//        }
-
+        userService.addUser(new UserRegisterRequestDTO("email1","password","Anna","Kral","user"));
+        userService.addUser(new UserRegisterRequestDTO("email2","password","Alicja","Kowal","user"));
+        userService.addUser(new UserRegisterRequestDTO("email3","password","Piotr","Matysek","user"));
+        userService.addUser(new UserRegisterRequestDTO("email4","password","Jan","Anys","admin"));
+    }
+    private void addEvent(){
+        eventService.addEvent(new EventAddDTO("email1","Volleyball","MEDIUM","Lokalizacja","Data","Czas","Jakaś wiadomość"));
+        eventService.addEvent(new EventAddDTO("email2","Swimming"  ,"LOW"   ,"Lokalizacja","Data","Czas","Jakaś wiadomość"));
+        eventService.addEvent(new EventAddDTO("email3","Fitness"   ,"HARD"  ,"Lokalizacja","Data","Czas","Jakaś wiadomość"));
+    }
+    private void addParticipants(){
+        eventService.addParticipant(eventRepository.findById((long)1).get(),userRepository.findById((long)1).get());
     }
 
+    private void addUserActivities(){
+        userService.addUserActivity(userDetailsRepository.findById(userRepository.findById((long) 2).get().getId()).get(), activityRepository.findByName("Volleyball").get());
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         this.addRoles();
+        this.addActivities();
+        this.addLevels();
         this.addUsers();
+        this.addEvent();
+        this.addParticipants();
+        this.addUserActivities();
     }
 }

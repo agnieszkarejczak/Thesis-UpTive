@@ -1,9 +1,14 @@
 package com.arejczak.uptive.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -26,7 +31,7 @@ public class User implements Serializable {
             strategy = SEQUENCE,
             generator = "user_sequence"
     )
-    @Column(name="id_users")
+    @Column(name="users_id")
     private Long id;
 
     @Column(name="email")
@@ -35,6 +40,9 @@ public class User implements Serializable {
     @NotNull
     @Column(name="password")
     private String password;
+
+    @Column(name="salt")
+    private String salt;
 
     @ManyToOne(optional = false)
     @JoinColumn(
@@ -52,6 +60,10 @@ public class User implements Serializable {
     )
     private UserDetails userDetails;
 
+    @ManyToMany(mappedBy="participants")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<Event> events;
+
 
     public User() {
 
@@ -62,6 +74,23 @@ public class User implements Serializable {
         this.password = password;
         this.role = role;
         this.userDetails = userDetails;
+        this.events = new HashSet<>();
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public UserDetails getUserDetails() {
