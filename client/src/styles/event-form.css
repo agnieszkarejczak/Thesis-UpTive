@@ -1,0 +1,62 @@
+.content{
+    overflow-y: auto;
+}
+.form-add-event{
+    margin:3em 1em;
+    width:80vw;
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.form-add-event select{
+    margin:1em;
+    border-radius: 0.5em;
+    width:30em;
+    height:2.5em;
+    border:0.1em solid #907bdbc9;
+}
+.form-add-event input{
+    margin:1em;
+    border-radius: 0.5em;
+    width:13em;
+    height:2em;
+    border:0.1em solid #907bdbc9;
+}
+.form-add-event label{
+    border-bottom: 0.01em solid #907bdb;
+    width:25em;
+    margin-left: 1em;
+    padding-left:0.3em;
+    text-align:left;
+    color:#9064c2;
+}
+.plus-icon{
+    color:#907bdbc9;
+    font-size:2em;
+    margin:0.5em;
+}
+.mess-button-container{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap:wrap;
+}
+
+.form-add-event textarea{
+    margin:1em 2em 1em 1em;
+    border-radius: 0.5em;
+    border:0.1em solid #907bdbc9;
+}
+
+.btn-submit-add-event{
+    background-color: #907bdbc9;
+    border:none;
+    border-radius:0.5em;
+    width:30em;
+    height:3em;
+    color:white;
+    margin-left: 1em;
+
+}

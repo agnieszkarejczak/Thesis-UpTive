@@ -1,0 +1,33 @@
+.nav-bar{
+    width:5em;
+    height: 100vh;
+    text-align: center;
+    background-color:#907bdbc9;
+  }
+
+.logo{
+  width:4.5em;
+  margin-top:1.5em;
+  margin-bottom:2em;
+}
+.bar-link{
+  color:rgba(255, 255, 255, 0.973);
+  text-decoration: none;
+  font-size:1em;
+  
+}
+.bar-ul{
+  list-style-type: none;
+  margin-left:1em;
+  margin-right:1em;
+}
+.bar-ul>li{
+
+  padding: 1em;
+  border-bottom: 0.1em solid rgba(255,255,255,0.2);
+}
+.bar-ul>li:last-child{
+  align-self: flex-end;
+  border-bottom: none;
+
+}
