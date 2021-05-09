@@ -11,16 +11,20 @@ import com.arejczak.uptive.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 
     @Autowired
     private UserRepository userRepository;
@@ -54,12 +58,15 @@ public class UserService {
 //    }
 
     //Using DTO
+    @Transactional
     public ResponseEntity addUser(UserRegisterRequestDTO userDTO){
         if(userRepository.getUserByEmail(userDTO.getEmail()).isPresent()){
             return new ResponseEntity<>("User with that email already exist",HttpStatus.CONFLICT);
         }
         String salt = BCrypt.gensalt();
         String hashpw = BCrypt.hashpw(userDTO.getPassword(),salt);
+        if(userDTO.getRoleName() == null)
+            userDTO.setRoleName("user");
         User user = new User(
                 userDTO.getEmail(),
                 hashpw,
@@ -69,13 +76,19 @@ public class UserService {
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
-    public ResponseEntity loginUser(String email, String password){
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    }
-
     public ResponseEntity addUserActivity(UserDetails user, Activity activity){
         user.addActivity(activity);
         userDetailsRepository.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @Override
+    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.getUserByEmail(email).get( );
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                new ArrayList<>()
+        );
     }
 }

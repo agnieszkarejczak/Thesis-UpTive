@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import axios from "axios";
 import '../styles/index.css';
 import '../styles/home.css';
 import Events from '../components/Home/Events';
@@ -8,6 +9,31 @@ import HomeHeader from '../components/Home/HomeHeader';
 import TopActivities from '../components/TopActivities';
 /*TODO Popraw routing (signInUp wyświetl bez left bar ale żeby można było przejść stamtąd do home) */
 const Home = () => {
+
+    useEffect(()=>{
+
+        const config = {
+            withCredentials:true,
+            crossdomain : true,
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        };
+
+        axios.get('http://localhost:8080/api/users',config).then(
+            function(response){
+                console.log(response);
+                if(response.status === 200){
+                    alert("Logged in!");
+                }
+        })
+        .catch(
+            function(error){
+                alert(error);
+            }
+        );
+    });
+
     return (
         <div className='content'>
             <HomeHeader />                

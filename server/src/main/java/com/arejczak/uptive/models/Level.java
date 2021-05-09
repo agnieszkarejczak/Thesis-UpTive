@@ -3,11 +3,13 @@ package com.arejczak.uptive.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serializable;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="level")
 @Table(name= "level")
-public class Level {
+public class Level implements Serializable {
     @Id
     @SequenceGenerator(
             name = "level_sequence",

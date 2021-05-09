@@ -1,11 +1,13 @@
 package com.arejczak.uptive.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +15,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="activity")
 @Table(name="activity")
-public class Activity {
+public class Activity implements Serializable {
     @Id
     @SequenceGenerator(
             name = "activity_sequence",
@@ -31,6 +33,7 @@ public class Activity {
     @Column(name="name", unique=true)
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy="userActivities")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<UserDetails> users;

@@ -1,5 +1,6 @@
 package com.arejczak.uptive.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -60,6 +61,7 @@ public class User implements Serializable {
     )
     private UserDetails userDetails;
 
+    @JsonIgnore
     @ManyToMany(mappedBy="participants")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Event> events;

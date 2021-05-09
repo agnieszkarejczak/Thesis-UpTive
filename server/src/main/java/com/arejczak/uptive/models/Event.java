@@ -1,5 +1,6 @@
 package com.arejczak.uptive.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -69,6 +70,7 @@ public class Event implements Serializable {
 
     @Column(name="created_at")
     private LocalDate created_at;
+
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)

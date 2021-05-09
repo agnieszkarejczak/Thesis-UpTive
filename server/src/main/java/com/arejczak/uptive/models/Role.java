@@ -3,6 +3,7 @@ package com.arejczak.uptive.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -16,7 +17,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
                 columnNames = {"name"}
         )
 )
-public class Role {
+public class Role implements Serializable {
 
     @Id
     @SequenceGenerator(

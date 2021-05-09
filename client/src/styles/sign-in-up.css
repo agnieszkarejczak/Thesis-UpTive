@@ -53,12 +53,11 @@
     bottom:4em;
     background-color: white;
     border:none;
-    border-bottom: 0.1em solid #7B84DB;
     margin: 0.2em 0;
     padding:0.2em 0.5em;
 }
-.btn-chooser:last-child{
-    border-bottom:none
+.btn-chooser:focus{
+    border-bottom: 0.1em solid #7B84DB;
 }
 .form-sign{
     display:flex;
@@ -72,7 +71,7 @@
 
 }
 
-.form-sign input[type=text]{
+.form-sign input[type=text], input[type=password]{
     width:24em;
     min-height:3em;
     margin:0.5em 0;
@@ -98,3 +97,4 @@
     width:15vw;
     color: white;
 }
+

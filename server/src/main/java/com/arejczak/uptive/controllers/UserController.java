@@ -2,18 +2,28 @@ package com.arejczak.uptive.controllers;
 
 import com.arejczak.uptive.dto.UserRegisterRequestDTO;
 import com.arejczak.uptive.models.UserDetails;
+import com.arejczak.uptive.payload.AuthRequest;
 import com.arejczak.uptive.repositories.RoleRepository;
 import com.arejczak.uptive.models.User;
 import com.arejczak.uptive.repositories.UserDetailsRepository;
+import com.arejczak.uptive.security.JwtUtil;
 import com.arejczak.uptive.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping(value="/api/users")
 public class UserController {
+
+    @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private final UserService userService;
@@ -30,6 +40,18 @@ public class UserController {
         this.userDetailsRepository = userDetailsRepository;
     }
 
+    @PostMapping("/login")
+    public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
+            );
+        } catch (Exception ex) {
+            throw new Exception("inavalid username/password");
+        }
+        return jwtUtil.generateToken(authRequest.getEmail());
+    }
+
     @GetMapping({"","/"})
     public ResponseEntity getUsers(){
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
@@ -38,6 +60,11 @@ public class UserController {
     @GetMapping("/{id}")
     public  ResponseEntity getUser(@PathVariable("id") Long id){
         return  new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/login")
+    public  ResponseEntity getUser(){
+        return  new ResponseEntity<>("Hi", HttpStatus.OK);
     }
     
     @PostMapping("/add")

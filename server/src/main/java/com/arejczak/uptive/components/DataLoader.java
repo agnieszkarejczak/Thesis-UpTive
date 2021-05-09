@@ -61,15 +61,15 @@ public class DataLoader implements ApplicationRunner {
         levelRepository.save(new Level("HARD"));
     }
     private void addUsers(){
-        userService.addUser(new UserRegisterRequestDTO("email1","password","Anna","Kral","user"));
-        userService.addUser(new UserRegisterRequestDTO("email2","password","Alicja","Kowal","user"));
-        userService.addUser(new UserRegisterRequestDTO("email3","password","Piotr","Matysek","user"));
-        userService.addUser(new UserRegisterRequestDTO("email4","password","Jan","Anys","admin"));
+        userService.addUser(new UserRegisterRequestDTO("email1@gmail.com","password","Anna","Kral","user"));
+        userService.addUser(new UserRegisterRequestDTO("email2@gmail.com","password","Alicja","Kowal","user"));
+        userService.addUser(new UserRegisterRequestDTO("email3@gmail.com","password","Piotr","Matysek","user"));
+        userService.addUser(new UserRegisterRequestDTO("janek@gmail.com","password","Jan","Anys","admin"));
     }
     private void addEvent(){
-        eventService.addEvent(new EventAddDTO("email1","Volleyball","MEDIUM","Lokalizacja","Data","Czas","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email2","Swimming"  ,"LOW"   ,"Lokalizacja","Data","Czas","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email3","Fitness"   ,"HARD"  ,"Lokalizacja","Data","Czas","Jakaś wiadomość"));
+        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","MEDIUM","Lokalizacja","Data","Czas","Jakaś wiadomość"));
+        eventService.addEvent(new EventAddDTO("email2@gmail.com","Swimming"  ,"LOW"   ,"Lokalizacja","Data","Czas","Jakaś wiadomość"));
+        eventService.addEvent(new EventAddDTO("email3@gmail.com","Fitness"   ,"HARD"  ,"Lokalizacja","Data","Czas","Jakaś wiadomość"));
     }
     private void addParticipants(){
         eventService.addParticipant(eventRepository.findById((long)1).get(),userRepository.findById((long)1).get());
