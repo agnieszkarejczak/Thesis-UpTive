@@ -13,7 +13,7 @@ const Event = () => {
             </ul>
             <ButtonProgress text='Accept'/>
             <ButtonProgress text='Reject'/>
-            <img className='avatar-search' src='basic.jpg' alt='par'/>
+            <img className='avatar-search' src='avatars/basic.jpg' alt='par'/>
         </div>
     )
 }

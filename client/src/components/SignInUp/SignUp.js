@@ -17,12 +17,9 @@ const SignUp = () => {
     console.log(errors, "Errors");
 
 
-    // const handleValidation = 
-
     const submitPost = async (formData) => {
 
-        // alert(formData);
-        
+
         delete formData[`acceptRequlations`];
         delete formData[`repeatPassword`];
 

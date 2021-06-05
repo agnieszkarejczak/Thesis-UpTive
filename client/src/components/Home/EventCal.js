@@ -1,19 +1,21 @@
 import React from 'react'
 import '../../styles/home.css';
 
-const EventCal = () => {
+const EventCal = (props) => {
     return (
         <div className='event-cal-container'>
-            <p>10:30</p>
+            <p>{props.time}</p>
             <div className='event-cal'>
                 <div className='event-cal-text'>
-                    <h4>Swimming</h4>
-                    <p>KRAKOW,KROWODRZA GORKA</p>
+                    <h4>{props.activity.name}</h4>
+                    <p>{props.location}</p>
                 </div>
                 <p>
-                18
+                    {/* TODO here only day ex. 18 */}
+                {props.date} 
                 <br></br>
-                Mar
+                {/* TODO here only month ex. March */}
+
                 </p>          
                 {/* <i class="fas fa-home"></i> */}
 

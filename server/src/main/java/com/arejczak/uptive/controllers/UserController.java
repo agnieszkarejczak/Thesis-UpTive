@@ -13,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -60,6 +63,12 @@ public class UserController {
     @GetMapping("/{id}")
     public  ResponseEntity getUser(@PathVariable("id") Long id){
         return  new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/me")
+    public ResponseEntity getMe(Authentication authentication, Principal principal) {
+        return  new ResponseEntity<>(userService.getMe(authentication), HttpStatus.OK);
+
     }
 
     @GetMapping("/login")

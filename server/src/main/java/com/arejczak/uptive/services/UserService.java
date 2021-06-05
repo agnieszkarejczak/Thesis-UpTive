@@ -11,6 +11,7 @@ import com.arejczak.uptive.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -44,6 +45,10 @@ public class UserService implements UserDetailsService{
         return user.orElse(null);
     }
 
+    public User getMe(Authentication authentication){
+        return userRepository.getUserByEmail(authentication.getName()).get();
+    }
+
 //    public ResponseEntity addUser(User user){
 //        if(userRepository.getUserByEmail(user.getEmail()).isPresent()){
 //            return new ResponseEntity<>("User with that email already exist",HttpStatus.CONFLICT);
@@ -71,7 +76,7 @@ public class UserService implements UserDetailsService{
                 userDTO.getEmail(),
                 hashpw,
                 roleRepository.findByName(userDTO.getRoleName()),
-                userDetailsRepository.save( new UserDetails(userDTO.getName(),userDTO.getSurname(),null,null))
+                userDetailsRepository.save( new UserDetails(userDTO.getName(),userDTO.getSurname(),"basic.jpg",null))
         );
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }

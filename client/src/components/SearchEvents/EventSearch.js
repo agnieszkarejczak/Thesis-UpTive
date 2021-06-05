@@ -4,27 +4,49 @@ import Circle from '../Circle';
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
 
-const EventSearch = () => {
+const EventSearch = (props) => {
+
+
+
     return (
         <div className='event-search'>
             <div className='participants'>
-                <img className='avatar-search' src='basic.jpg' alt='par'/>
-                <img className='avatar-search' src='basic.jpg' alt='par'/>
-                <img className='avatar-search' src='basic.jpg' alt='par'/>
-                <div className='avatar-search'> +3</div>
+            <img className='avatar-search' key={props.assignedBy.id} src={"avatars/"+props.assignedBy.userDetails.avatar} alt='par'/>
+                {
 
+                    props.participants.map((p , index) => {
+                        if(index < 3){
+                            return <img className='avatar-search' key={p.id} src={"avatars/"+p.userDetails.avatar} alt='par'/>
+                        }
+                        else if(index===3){
+                            return <div className='avatar-search'> 
+                            {props.participants.length-3}
+                            </div>
+                        }
+                        
+                        
+                    })
+                }
             </div>
             <div className='event-search-info'>
             <ul>
                 <li className='li-activity'>
-                    Volleyball 
+                    {props.activity.name} 
                     <IconContext.Provider value={{ className: 'event-level'}}>
-                        <FaStar/><FaStar/><FaRegStar/>
+                        {/* Inline switch statement */}
+                    {
+                        {
+                            1: <div><FaStar/><FaRegStar/><FaRegStar/></div>,
+                            2: <div><FaStar/><FaStar/><FaRegStar/></div>,
+                            3: <div><FaStar/><FaStar/><FaStar/></div>
+                        }[props.level.id]
+                    }
+                        
                     </IconContext.Provider>
                     
                 </li>
-                <li>Kraków, ul. Pawia 10A</li>
-                <li>20.03.2021  10:30</li>
+                <li>{props.location} </li>
+                <li>{props.date}  {props.time}</li>
             </ul>
             <Circle borderColor= '#907bdb' color='#907bdb' number={3} />
             </div>
