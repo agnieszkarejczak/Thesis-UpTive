@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -55,7 +56,6 @@ public class UserService implements UserDetailsService{
     }
 
     //Using DTO
-    @Transactional
     public ResponseEntity addUser(UserRegisterRequestDTO userDTO){
         if(userRepository.getUserByEmail(userDTO.getEmail()).isPresent()){
             return new ResponseEntity<>("User with that email already exist",HttpStatus.CONFLICT);
@@ -83,10 +83,12 @@ public class UserService implements UserDetailsService{
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.getUserByEmail(email).get( );
+        ArrayList authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                new ArrayList<>()
+                authorities
         );
     }
 }
