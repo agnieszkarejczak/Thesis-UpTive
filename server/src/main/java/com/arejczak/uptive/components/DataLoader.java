@@ -94,6 +94,14 @@ public class DataLoader implements ApplicationRunner {
         eventService.addParticipant(new ParticipantAddDTO(2,1));
     }
 
+    private void acceptParticipants(){
+        eventService.acceptParticipant((long)1);
+        eventService.acceptParticipant((long)2);
+        eventService.acceptParticipant((long)3);
+        eventService.acceptParticipant((long)4);
+        eventService.acceptParticipant((long)6);
+    }
+
     private void addUserActivities(){
         userService.addUserActivity(new UserActivityDTO( (long)1,(long)1));
         userService.addUserActivity(new UserActivityDTO( (long)1,(long)2));
@@ -108,6 +116,7 @@ public class DataLoader implements ApplicationRunner {
         this.addUsers();
         this.addEvent();
         this.addParticipants();
+        this.acceptParticipants();
         this.addUserActivities();
     }
 }

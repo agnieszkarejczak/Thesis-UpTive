@@ -3,11 +3,9 @@ package com.arejczak.uptive.services;
 import com.arejczak.uptive.dto.EventAddDTO;
 import com.arejczak.uptive.dto.ParticipantAddDTO;
 import com.arejczak.uptive.models.Event;
+import com.arejczak.uptive.models.EventParticipant;
 import com.arejczak.uptive.models.User;
-import com.arejczak.uptive.repositories.ActivityRepository;
-import com.arejczak.uptive.repositories.EventRepository;
-import com.arejczak.uptive.repositories.LevelRepository;
-import com.arejczak.uptive.repositories.UserRepository;
+import com.arejczak.uptive.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +22,9 @@ public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    private EventParticipantRepository eventParticipantRepository;
 
     @Autowired
     private ActivityRepository activityRepository;
@@ -59,9 +60,29 @@ public class EventService {
     public ResponseEntity addParticipant(ParticipantAddDTO participantDTO){
         Event event = eventRepository.findById((long)participantDTO.getEventId()).get();
         User user = userRepository.findById((long)participantDTO.getUserId()).get();
-        event.addParticipant(user);
+
+        EventParticipant eventParticipant =  new EventParticipant(user, event,false);
+
+        eventParticipantRepository.save(eventParticipant);
+
+        event.getEventsParticipants().add(eventParticipant);
+        user.getEventsParticipants().add(eventParticipant);
+
         eventRepository.save(event);
         return new ResponseEntity<>(event, HttpStatus.OK);
+    }
+
+    public ResponseEntity acceptParticipant(Long id){
+        EventParticipant eventParticipant = eventParticipantRepository.findById((long)id).get();
+        eventParticipant.setAdded(true);
+        eventParticipantRepository.save(eventParticipant);
+        return new ResponseEntity<>(eventParticipant, HttpStatus.OK);
+
+    }
+
+    public ResponseEntity rejectParticipant(Long id){
+        eventParticipantRepository.deleteById((long)id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

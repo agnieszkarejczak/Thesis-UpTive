@@ -1,12 +1,10 @@
 package com.arejczak.uptive.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -63,10 +61,9 @@ public class User implements Serializable {
     private UserDetails userDetails;
 
     @JsonIgnore
-    @ManyToMany(mappedBy="participants")
+    @OneToMany(mappedBy = "participant")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Event> events;
-
+    private Set<EventParticipant> eventsParticipants;
 
     public User() {
 
@@ -77,15 +74,15 @@ public class User implements Serializable {
         this.password = password;
         this.role = role;
         this.userDetails = userDetails;
-        this.events = new HashSet<>();
+        this.eventsParticipants = new HashSet<>();
     }
 
-    public Set<Event> getEvents() {
-        return events;
+    public Set<EventParticipant> getEventsParticipants() {
+        return eventsParticipants;
     }
 
-    public void setEvents(Set<Event> events) {
-        this.events = events;
+    public void setEventsParticipants(Set<EventParticipant> eventsParticipants) {
+        this.eventsParticipants = eventsParticipants;
     }
 
     public String getSalt() {

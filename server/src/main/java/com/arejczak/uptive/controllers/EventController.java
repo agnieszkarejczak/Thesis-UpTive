@@ -27,12 +27,21 @@ public class EventController {
 
     @PostMapping("/add")
     public ResponseEntity addEvent(@RequestBody EventAddDTO eventDTO){
-        return new ResponseEntity<>(eventService.addEvent(eventDTO),HttpStatus.OK);
+        return eventService.addEvent(eventDTO);
     }
 
     @PostMapping("/participant/add")
     public ResponseEntity addParticipant(@RequestBody ParticipantAddDTO participantAddDTO){
-        return new ResponseEntity<>(eventService.addParticipant(participantAddDTO),HttpStatus.OK);
+        return eventService.addParticipant(participantAddDTO);
+    }
+    @PutMapping("/participant/{id}/accept")
+    public ResponseEntity acceptParticipant(@PathVariable("id") Long id){
+        return eventService.acceptParticipant(id);
+    }
+
+    @DeleteMapping("/participant/{id}/reject")
+    public ResponseEntity rejectParticipant(@PathVariable("id") Long id){
+        return eventService.rejectParticipant(id);
     }
 
 }

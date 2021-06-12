@@ -73,15 +73,18 @@ public class Event implements Serializable {
     @Column(name="created_at")
     private LocalDate created_at;
 
-
-    @ManyToMany
+    @OneToMany(mappedBy = "event")
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(
-        name = "event_participant",
-                joinColumns = {@JoinColumn(name = "event_id")},
-        inverseJoinColumns = {@JoinColumn(name = "participant_id")}
-    )
-    private Set<User> participants;
+    private Set<EventParticipant> eventsParticipants;
+
+//    @ManyToMany
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    @JoinTable(
+//        name = "event_participant",
+//                joinColumns = {@JoinColumn(name = "event_id")},
+//        inverseJoinColumns = {@JoinColumn(name = "participant_id")}
+//    )
+//    private Set<User> participants;
 
     public Event(User assignedBy, Activity activity, Level level, String location, String date, String time, String message, int required) {
         this.assignedBy = assignedBy;
@@ -93,7 +96,7 @@ public class Event implements Serializable {
         this.message = message;
         this.required = required;
         this.created_at = LocalDate.now();
-        this.participants = new HashSet<>();
+        this.eventsParticipants = new HashSet<>();
     }
 
     public Event() {
@@ -107,17 +110,19 @@ public class Event implements Serializable {
         this.level = level;
     }
 
-    public Set<User> getParticipants() {
-        return participants;
+    public Set<EventParticipant> getEventsParticipants() {
+        return eventsParticipants;
     }
 
-    public void setParticipants(Set<User> participants) {
-        this.participants = participants;
+    public void setEventsParticipants(Set<EventParticipant> eventsParticipants) {
+        this.eventsParticipants = eventsParticipants;
     }
-    public void addParticipant(User participant) {
-        this.participants.add(participant);
-        participant.getEvents().add(this);
-    }
+
+
+//    public void addParticipant(EventParticipant eventParticipants) {
+//        this.eventParticipants.add(participant);
+//        eventParticipants.getEvents().add(this);
+//    }
 
     public int getRequired() {
         return required;
