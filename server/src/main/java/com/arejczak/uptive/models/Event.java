@@ -1,6 +1,5 @@
 package com.arejczak.uptive.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -68,6 +67,9 @@ public class Event implements Serializable {
     @Column(name="message")
     private String message;
 
+    @Column(name="required")
+    private int required;
+
     @Column(name="created_at")
     private LocalDate created_at;
 
@@ -81,7 +83,7 @@ public class Event implements Serializable {
     )
     private Set<User> participants;
 
-    public Event(User assignedBy, Activity activity,Level level, @NotNull String location, @NotNull String date, @NotNull String time, String message) {
+    public Event(User assignedBy, Activity activity, Level level, String location, String date, String time, String message, int required) {
         this.assignedBy = assignedBy;
         this.activity = activity;
         this.level =level;
@@ -89,6 +91,7 @@ public class Event implements Serializable {
         this.date = date;
         this.time = time;
         this.message = message;
+        this.required = required;
         this.created_at = LocalDate.now();
         this.participants = new HashSet<>();
     }
@@ -114,6 +117,14 @@ public class Event implements Serializable {
     public void addParticipant(User participant) {
         this.participants.add(participant);
         participant.getEvents().add(this);
+    }
+
+    public int getRequired() {
+        return required;
+    }
+
+    public void setRequired(int required) {
+        this.required = required;
     }
 
     public Activity getActivity() {

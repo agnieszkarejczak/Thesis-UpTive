@@ -1,6 +1,7 @@
 package com.arejczak.uptive.services;
 
 import com.arejczak.uptive.dto.EventAddDTO;
+import com.arejczak.uptive.dto.ParticipantAddDTO;
 import com.arejczak.uptive.models.Event;
 import com.arejczak.uptive.models.User;
 import com.arejczak.uptive.repositories.ActivityRepository;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,16 +49,19 @@ public class EventService {
                         eventDTO.getLocation(),
                         eventDTO.getDate(),
                         eventDTO.getTime(),
-                        eventDTO.getMessage()
-                )
+                        eventDTO.getMessage(),
+                        eventDTO.getRequired())
         );
         return new ResponseEntity<>(eventRepository.save(event), HttpStatus.OK);
     }
 
 
-    public ResponseEntity addParticipant(Event event, User user){
+    public ResponseEntity addParticipant(ParticipantAddDTO participantDTO){
+        Event event = eventRepository.findById((long)participantDTO.getEventId()).get();
+        User user = userRepository.findById((long)participantDTO.getUserId()).get();
         event.addParticipant(user);
         eventRepository.save(event);
         return new ResponseEntity<>(event, HttpStatus.OK);
     }
+
 }

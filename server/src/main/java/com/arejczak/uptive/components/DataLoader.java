@@ -1,6 +1,8 @@
 package com.arejczak.uptive.components;
 
 import com.arejczak.uptive.dto.EventAddDTO;
+import com.arejczak.uptive.dto.ParticipantAddDTO;
+import com.arejczak.uptive.dto.UserActivityDTO;
 import com.arejczak.uptive.dto.UserRegisterRequestDTO;
 import com.arejczak.uptive.models.*;
 import com.arejczak.uptive.repositories.*;
@@ -10,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -74,28 +74,30 @@ public class DataLoader implements ApplicationRunner {
         userService.addUser(new UserRegisterRequestDTO("janek@gmail.com","password","Jan","Anys","admin"));
     }
     private void addEvent(){
-        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","MEDIUM","ul.Miodowa 3 ,Kraków","20-12-2021","08:00","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email2@gmail.com","Swimming"  ,"LOW"   ,"ul.Majora 10 ,Kraków","10-06-2021","10:30","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email4@gmail.com","Fitness"   ,"HARD"  ,"ul.Opolska 8 ,Kraków","19-06-2021","17:00","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email5@gmail.com","Climbing"   ,"HARD"  ,"ul.Opolska 8 ,Kraków","22-06-2021","17:00","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email2@gmail.com","Volleyball"   ,"MEDIUM"  ,"ul.Warszawska 5 ,Kraków","26-06-2021","17:00","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball"   ,"HARD"  ,"ul.Miodowa 3 ,Kraków","30-06-2021","10:30","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email3@gmail.com","Swimming"   ,"MEDIUM"  ,"ul.Majora 10 ,Kraków","08-06-2021","19:00","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email6@gmail.com","Basketball"   ,"LOW"  ,"ul.Pawia 2 ,Kraków","12-06-2021","18:00","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"   ,"HARD"  ,"ul.Lubicz 1 ,Kraków","31-06-2021","18:00","Jakaś wiadomość"));
-        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"   ,"HARD"  ,"ul.Lubicz 1 ,Kraków","01-07-2021","18:00","Jakaś wiadomość"));
+        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","MEDIUM","ul.Miodowa 3 ,Kraków","20-12-2021","08:00","Jakaś wiadomość",   7));
+        eventService.addEvent(new EventAddDTO("email2@gmail.com","Swimming"  ,"LOW"   ,"ul.Majora 10 ,Kraków","10-06-2021","10:30","Jakaś wiadomość",   5));
+        eventService.addEvent(new EventAddDTO("email4@gmail.com","Fitness"   ,"HARD"  ,"ul.Opolska 8 ,Kraków","19-06-2021","17:00","Jakaś wiadomość",   3));
+        eventService.addEvent(new EventAddDTO("email5@gmail.com","Climbing"  ,"HARD"  ,"ul.Opolska 8 ,Kraków","22-06-2021","17:00","Jakaś wiadomość",   5));
+        eventService.addEvent(new EventAddDTO("email2@gmail.com","Volleyball","MEDIUM","ul.Warszawska 5 ,Kraków","26-06-2021","17:00","Jakaś wiadomość",6));
+        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","HARD"  ,"ul.Miodowa 3 ,Kraków","30-06-2021","10:30","Jakaś wiadomość",   6));
+        eventService.addEvent(new EventAddDTO("email3@gmail.com","Swimming"  ,"MEDIUM","ul.Majora 10 ,Kraków","08-06-2021","19:00","Jakaś wiadomość",   6));
+        eventService.addEvent(new EventAddDTO("email6@gmail.com","Basketball","LOW"   ,"ul.Pawia 2 ,Kraków","12-06-2021","18:00","Jakaś wiadomość",     6));
+        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków","31-06-2021","18:00","Jakaś wiadomość",    6));
+        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków","01-07-2021","18:00","Jakaś wiadomość",    6));
     }
     private void addParticipants(){
-        eventService.addParticipant(eventRepository.findById((long)1).get(),userRepository.findById((long)5).get());
-        eventService.addParticipant(eventRepository.findById((long)1).get(),userRepository.findById((long)2).get());
-        eventService.addParticipant(eventRepository.findById((long)1).get(),userRepository.findById((long)3).get());
-        eventService.addParticipant(eventRepository.findById((long)1).get(),userRepository.findById((long)4).get());
-        eventService.addParticipant(eventRepository.findById((long)1).get(),userRepository.findById((long)6).get());
-        eventService.addParticipant(eventRepository.findById((long)2).get(),userRepository.findById((long)1).get());
+        eventService.addParticipant(new ParticipantAddDTO(1,5));
+        eventService.addParticipant(new ParticipantAddDTO(1,2));
+        eventService.addParticipant(new ParticipantAddDTO(1,3));
+        eventService.addParticipant(new ParticipantAddDTO(1,4));
+        eventService.addParticipant(new ParticipantAddDTO(1,6));
+        eventService.addParticipant(new ParticipantAddDTO(2,1));
     }
 
     private void addUserActivities(){
-        userService.addUserActivity(userDetailsRepository.findById(userRepository.findById((long) 2).get().getId()).get(), activityRepository.findByName("Volleyball").get());
+        userService.addUserActivity(new UserActivityDTO( (long)1,(long)1));
+        userService.addUserActivity(new UserActivityDTO( (long)1,(long)2));
+        userService.addUserActivity(new UserActivityDTO( (long)1,(long)3));
     }
 
     @Override

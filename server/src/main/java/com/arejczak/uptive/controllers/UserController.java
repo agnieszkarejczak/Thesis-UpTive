@@ -1,5 +1,6 @@
 package com.arejczak.uptive.controllers;
 
+import com.arejczak.uptive.dto.UserActivityDTO;
 import com.arejczak.uptive.dto.UserRegisterRequestDTO;
 import com.arejczak.uptive.models.UserDetails;
 import com.arejczak.uptive.payload.AuthRequest;
@@ -71,13 +72,16 @@ public class UserController {
 
     }
 
-    @GetMapping("/login")
-    public  ResponseEntity getUser(){
-        return  new ResponseEntity<>("Hi", HttpStatus.OK);
-    }
-    
     @PostMapping("/add")
     public ResponseEntity  addUser(@RequestBody UserRegisterRequestDTO user){
         return userService.addUser(user);
     }
+
+    @PostMapping("/addActivity")
+    public ResponseEntity  addUserActivity(@RequestBody UserActivityDTO userActivityDTO)
+    {
+        return userService.addUserActivity(userActivityDTO);
+    }
+
+
 }

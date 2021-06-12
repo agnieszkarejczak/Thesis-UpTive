@@ -1,18 +1,17 @@
 package com.arejczak.uptive.dto;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserRegisterRequestDTO {
-    private String email;
-    private String password;
-    private String name;
-    private String surname;
-    private String roleName;
+public class ParticipantAddDTO implements Serializable {
+    private long eventId;
+    private long userId;
+
 }

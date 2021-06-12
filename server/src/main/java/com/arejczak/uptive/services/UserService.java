@@ -1,10 +1,12 @@
 package com.arejczak.uptive.services;
 
+import com.arejczak.uptive.dto.UserActivityDTO;
 import com.arejczak.uptive.dto.UserRegisterRequestDTO;
 import com.arejczak.uptive.models.Activity;
 import com.arejczak.uptive.models.Event;
 import com.arejczak.uptive.models.User;
 import com.arejczak.uptive.models.UserDetails;
+import com.arejczak.uptive.repositories.ActivityRepository;
 import com.arejczak.uptive.repositories.RoleRepository;
 import com.arejczak.uptive.repositories.UserDetailsRepository;
 import com.arejczak.uptive.repositories.UserRepository;
@@ -34,6 +36,9 @@ public class UserService implements UserDetailsService{
     private RoleRepository roleRepository;
 
     @Autowired
+    private ActivityRepository activityRepository;
+
+    @Autowired
     private UserDetailsRepository userDetailsRepository;
 
     public List<User> getUsers(){
@@ -48,19 +53,6 @@ public class UserService implements UserDetailsService{
     public User getMe(Authentication authentication){
         return userRepository.getUserByEmail(authentication.getName()).get();
     }
-
-//    public ResponseEntity addUser(User user){
-//        if(userRepository.getUserByEmail(user.getEmail()).isPresent()){
-//            return new ResponseEntity<>("User with that email already exist",HttpStatus.CONFLICT);
-//        }
-//        String salt = BCrypt.gensalt();
-//        String hashpw = BCrypt.hashpw(user.getPassword(),salt);
-//        user.setSalt(salt);
-//        user.setPassword(hashpw);
-//        user.setRole(roleRepository.findByName(user.getRole().getName()));
-//        user.setUserDetails(userDetailsRepository.save( new UserDetails(user.getUserDetails().getName(),user.getUserDetails().getSurname(),null,null)));
-//        return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
-//    }
 
     //Using DTO
     @Transactional
@@ -81,10 +73,11 @@ public class UserService implements UserDetailsService{
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
-    public ResponseEntity addUserActivity(UserDetails user, Activity activity){
-        user.addActivity(activity);
-        userDetailsRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity addUserActivity(UserActivityDTO userActivity){
+        UserDetails userDetails = userRepository.findById((long)userActivity.getUserId()).get().getUserDetails();
+        userDetails.addActivity(activityRepository.findById((long)userActivity.getActivityId()).get());
+        userDetailsRepository.save(userDetails);
+        return new ResponseEntity<>(userDetails, HttpStatus.OK);
     }
 
     @Override

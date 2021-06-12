@@ -1,6 +1,7 @@
 package com.arejczak.uptive.controllers;
 
 import com.arejczak.uptive.dto.EventAddDTO;
+import com.arejczak.uptive.dto.ParticipantAddDTO;
 import com.arejczak.uptive.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,11 @@ public class EventController {
     @PostMapping("/add")
     public ResponseEntity addEvent(@RequestBody EventAddDTO eventDTO){
         return new ResponseEntity<>(eventService.addEvent(eventDTO),HttpStatus.OK);
+    }
+
+    @PostMapping("/participant/add")
+    public ResponseEntity addParticipant(@RequestBody ParticipantAddDTO participantAddDTO){
+        return new ResponseEntity<>(eventService.addParticipant(participantAddDTO),HttpStatus.OK);
     }
 
 }
