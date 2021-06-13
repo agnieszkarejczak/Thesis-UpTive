@@ -1,19 +1,56 @@
 import React from 'react'
 import '../../styles/home.css';
 import '../../styles/search-events.css';
-import ButtonProgress from '../ButtonProgress';
+import {Api} from '../../apiHandler/apiHandler';
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const Event = () => {
+const Event = (props) => {
+
+    function accept(){
+            Api.acceptParticipant(props.id).then(response =>{
+            if(response.status === 200){
+                props.setChanges(oldChange => oldChange+1);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Participant added successfully!',
+                    showConfirmButton: true
+                })
+            }
+        })
+        .catch(error =>
+            console.log(error)
+        );
+
+    }
+
+    function reject(){
+        Api.rejectParticipant(props.id).then(response =>{
+            if(response.status === 200){
+                props.setChanges(oldChange => oldChange+1);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Participant has been rejected!',
+                    showConfirmButton: true
+                })
+            }
+        })
+        .catch(error =>
+            console.log(error)
+        );
+    }
+
     return (
         <div className='event'>
             <ul>
-                <li className='li-activity-event'>Swimming</li>
-                <li>KRAKOW,KROWODRZA</li>
-                <li>20.03.2021, Saturday    10:30</li>
+                <li className='li-activity-event'>{props.activity.name}</li>
+                <li>{props.location}</li>
+                <li>{props.date+'  '+props.time}</li>
             </ul>
-            <ButtonProgress text='Accept'/>
-            <ButtonProgress text='Reject'/>
-            <img className='avatar-search' src='avatars/basic.jpg' alt='par'/>
+            <button className='btn-progress' onClick={accept}>Accept</button>
+            <button className='btn-progress' onClick={reject}>Reject</button>
+
+            <img className='avatar-search' src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
         </div>
     )
 }

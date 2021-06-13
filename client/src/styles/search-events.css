@@ -1,12 +1,15 @@
 .content-search{
-    background-color: white;
+    display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: flex-start;
     padding:0 1em;
+    background-color: #E6E6E6;
 }
 .event-search{
     display:flex;
     flex-direction: column;
+    
     padding: 1em;
     width:15em;
     height:13em;

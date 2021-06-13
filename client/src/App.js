@@ -7,6 +7,7 @@ import EventForm from './views/EventForm';
 import SignInUp from './views/SignInUp';
 import NavBar from './components/NavBar';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import ProtectedRoute from "./ProtectedRoute";
 
 //TODO 404 should be without leftbar etc.
 function App() {
@@ -20,13 +21,13 @@ function App() {
         <div>
 
             <Route exact path='/signInUp' component={SignInUp}/>
-            <Route exact path='/home' component={Home}/>
-            <Route exact path='/'>
+            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/home' component={Home}/>
+            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/'>
               <Redirect to='/home'/>
-            </Route>
-            <Route exact path='/profile' component={Profile}/>
-            <Route exact path='/SearchEvents' component={SearchEvents}/>
-            <Route exact path='/EventForm' component={EventForm}/>
+            </ProtectedRoute>
+            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/profile' component={Profile}/>
+            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/SearchEvents' component={SearchEvents}/>
+            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/EventForm' component={EventForm}/>
         </div>
         
       </div>

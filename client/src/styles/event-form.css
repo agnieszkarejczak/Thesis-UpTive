@@ -52,11 +52,16 @@
 
 .btn-submit-add-event{
     background-color: #907bdbc9;
-    border:none;
+    border: 0.1em solid #907bdbc9;
     border-radius:0.5em;
     width:30em;
     height:3em;
     color:white;
     margin-left: 1em;
 
+}
+.btn-submit-add-event:hover{
+    background-color:white;
+    color: #907bdbc9;
+    
 }

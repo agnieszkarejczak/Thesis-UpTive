@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import '../styles/index.css';
 import '../styles/home.css';
-import Events from '../components/Home/Events';
+import Event from '../components/Home/Event';
 import EventCal from '../components/Home/EventCal';
 import EventSearch from '../components/SearchEvents/EventSearch';
 import HomeHeader from '../components/Home/HomeHeader';
@@ -15,6 +15,7 @@ const Home = () => {
         events: []
     });
     const [currentUser, setCurrentUser] = useState({});
+    const [changes,setChanges]=useState(0);
 
     useEffect(()=>{
 
@@ -24,7 +25,7 @@ const Home = () => {
             }
         })
         .catch(error =>
-            alert(error)
+            console.log(error)
         );
 
         Api.events().then(response =>{
@@ -33,17 +34,54 @@ const Home = () => {
             }
         })
         .catch(error =>
-            alert(error)
+            console.log(error)
         );
 
-    },[]);
+    },[changes]);
+
+    function countCalEvents(){
+        return events?.events.filter( e => 
+            e?.assignedBy.id === currentUser?.id
+            || 
+                (e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length !==0
+                && 
+                e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id)[0].added
+            )).length
+        
+    }
 
     return (
         <div className='content'>
-            <HomeHeader />                
+            <HomeHeader
+                // inprogress={} 
+                callendar={countCalEvents()}
+            />                
             <div className='main-content'>
                 <div className='column'>
-                    <Events />
+                {events?.events.map(e =>{
+                    if(e.assignedBy.id === currentUser?.id){
+                        return e.eventsParticipants.filter(p => !p.added).map(p => {
+       
+                                return <Event
+                                    setChanges={setChanges}
+                                    changes={changes} 
+                                    key={p.id}
+                                    id={p.id}
+                                    currentUser = {currentUser?.id}
+                                    participant={p?.participant}
+                                    activity={e?.activity}
+                                    location = {e?.location}
+                                    time = {e?.time}
+                                    date = {e?.date}
+                                    message = {e?.message}
+                                    created_at = {e?.created_at}
+
+                                />
+                            
+                        })
+                    }
+                    
+                })}
                 </div>
                 <div className='column'>
                     
@@ -52,9 +90,13 @@ const Home = () => {
                         ADD EVENT
                     </div>
                     <div className='events'>
-                        {console.log(currentUser)}
-                        {events.events.map(e =>{
-                            if(e?.assignedBy.id === currentUser?.id || e?.participants.filter(p=>p.id === currentUser?.id).length !==0)
+                        {events?.events.map(e =>{
+                            if(            e?.assignedBy.id === currentUser?.id
+                                || 
+                                    (e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length !==0
+                                    && 
+                                    e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id)[0].added
+                                ))
                             return <EventCal
                             key={e?.id}
                             activity={e?.activity} 
@@ -63,8 +105,9 @@ const Home = () => {
                             time = {e?.time}
                             date = {e?.date}
                             message = {e?.message}
+                            required = {e?.required}
                             created_at = {e?.created_at}
-                            participants = {e?.participants}
+                            eventsParticipants = {e?.eventsParticipants}
                             level = {e?.level}
                             />
                         })}
@@ -78,9 +121,13 @@ const Home = () => {
                 </div>
                 <div className='recommended-top-container'>
                     <div className='recommended'>
-                        {events.events.map(e => { 
+                        {events?.events.map(e => { 
                             return <EventSearch 
+                            setChanges={setChanges}
+                            changes={changes}
                             key={e?.id}
+                            id={e?.id}
+                            currentUser={currentUser?.id}
                             activity={e?.activity} 
                             assignedBy={e?.assignedBy}
                             location = {e?.location}
@@ -88,7 +135,8 @@ const Home = () => {
                             date = {e?.date}
                             message = {e?.message}
                             created_at = {e?.created_at}
-                            participants = {e?.participants}
+                            required = {e?.required}
+                            eventsParticipants = {e?.eventsParticipants}
                             level = {e?.level}
                             />
                         })}

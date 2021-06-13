@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import '../styles/nav-bar.css';
+import {Api} from '../apiHandler/apiHandler';
 
 const LeftBar = () => {
     return (
@@ -27,7 +28,7 @@ const LeftBar = () => {
                     </Link>
                 </li>
                 <li>
-                    < Link to='/SignInUP' className='bar-link'>
+                    < Link to='/SignInUP' className='bar-link' onClick={Api.invalidateSession}>
                         <i class="fas fa-door-open"></i>
                     </Link>
                 </li>

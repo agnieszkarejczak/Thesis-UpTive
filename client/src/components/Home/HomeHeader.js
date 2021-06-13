@@ -2,7 +2,7 @@ import React from 'react'
 import '../../styles/home.css';
 import Circle from '../Circle';
 
-const HomeHeader = () => {
+const HomeHeader = (props) => {
     return (
         <div className='header'>
             <div className='column-header'>
@@ -11,7 +11,7 @@ const HomeHeader = () => {
             </div>
             <div className='column-header'>
             <p>CALLENDAR</p>
-            <Circle borderColor= '#907bdb' color='grey' number={8}/>
+            <Circle borderColor= '#907bdb' color='grey' number={props.callendar}/>
             </div>
             <div className='column-header'>
             <p>RECOMENDED</p>

@@ -1,28 +1,69 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import '../../styles/search-events.css';
 import Circle from '../Circle';
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
+import {Api} from '../../apiHandler/apiHandler';
+import axios from "axios";
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import Swal from "sweetalert2";
 
 const EventSearch = (props) => {
 
 
+    const addParticipant ={
+        userId: props.currentUser,
+        eventId: props.id
+    };
+
+
+    const onClick = ()=>{
+        Api.addParticipant(addParticipant).then(response =>{
+            if(response.status === 200){
+                props.setChanges(oldChange => oldChange+1);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Request sent!',
+                    showConfirmButton: true
+                })
+
+            }
+        })
+        .catch(error =>
+            Swal.fire({
+                icon: 'error',
+                title: 'Ups! something went wrong',
+                text:'You cannot send request to this event',
+                showConfirmButton: true
+            })
+            
+        );    
+    };
 
     return (
         <div className='event-search'>
             <div className='participants'>
-            <img className='avatar-search' key={props.assignedBy.id} src={"avatars/"+props.assignedBy.userDetails.avatar} alt='par'/>
+                
+            <img className='avatar-search' title={props.assignedBy.userDetails.name+" "+props.assignedBy.userDetails.surname} 
+            key={props.assignedBy.id} src={"avatars/"+props.assignedBy.userDetails.avatar} alt='par'/>
                 {
 
-                    props.participants.map((p , index) => {
-                        if(index < 3){
-                            return <img className='avatar-search' key={p.id} src={"avatars/"+p.userDetails.avatar} alt='par'/>
-                        }
-                        else if(index===3){
-                            return <div className='avatar-search'> 
-                            {props.participants.length-3}
-                            </div>
-                        }
+                    props.eventsParticipants.filter(p => p.added).map((p , index) => {
+
+                            if(index < 3){
+                                // return <Avatar></Avatar>
+                                return <img title={p.participant.userDetails.name+" "+p.participant.userDetails.surname}  
+                                className='avatar-search' key={p.participant.id} src={"avatars/"+p.participant.userDetails.avatar} alt='par'/>
+                            }
+                            else if(index===3){
+                                return <div className='avatar-search'> 
+                                {"+"+(props.eventsParticipants.filter(p => p.added).length-3)}
+                                </div>
+                            }
+
+
                         
                         
                     })
@@ -48,12 +89,17 @@ const EventSearch = (props) => {
                 <li>{props.location} </li>
                 <li>{props.date}  {props.time}</li>
             </ul>
-            <Circle borderColor= '#907bdb' color='#907bdb' number={3} />
+            {props.required?
+            <Circle borderColor= '#907bdb' color='#907bdb' number={props.required-props.eventsParticipants.filter(p =>p.added === true).length} />
+            :
+            ""
+            }
+            
             </div>
             
             
             
-            <button className='request-button'>REQUEST</button>
+            <button className='request-button' onClick={onClick}>REQUEST</button>
             {/* <div className='icons-bar'>
             <FaStar/><FaStar/><FaRegStar/> <FaStar/><FaStar/><FaRegStar/>
             </div> */}

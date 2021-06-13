@@ -12,8 +12,7 @@ export class Api {
     
 
     static invalidateSession(){
-        alert("403 Unauthorized");
-        // localStorage.removeItem('token');
+        localStorage.removeItem('token');
         //this.logout();
     }
 
@@ -47,6 +46,24 @@ export class Api {
         );
     }
 
+    static put(url,body) {
+        return axios.put(apiUrl + url,body,config)
+        .then(
+            response => {
+                return response;
+            }
+        );
+    }
+
+    static delete(url) {
+        return axios.delete(apiUrl + url,config)
+        .then(
+            response => {
+                return response;
+            }
+        );
+    }
+
     //=====
     static me() {
         return this.get("/api/users/me");
@@ -70,13 +87,29 @@ export class Api {
         return this.get("/api/activities");
     }
 
+    static addUserActivity(body){
+        return this.post("/api/users/addActivity",body)
+    }
+
     static levels(){
         return this.get("/api/levels");
     }
 
     static addEvent(body){
-        this.post("/api/events/add",body)
+        return this.post("/api/events/add",body)
 
+    }
+    //Add participant
+    static addParticipant(body){
+        return this.post("/api/events/participant/add",body)
+    }
+
+    static acceptParticipant(id){
+        return this.put(`/api/events/participant/${id}/accept`);
+    }
+
+    static rejectParticipant(id){
+        return this.delete(`/api/events/participant/${id}/reject`);
     }
 
 }
