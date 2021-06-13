@@ -1,21 +1,25 @@
 .content-profile{
-    flex-direction:row;
+    flex-direction:column;
+    align-items:center;
+    width: 92vw;
+    padding:1em;
+    overflow-y: auto;
     
 }
 .profile-column{
     display:flex;
     flex-direction: column;
     align-items:center;
-    min-width: 30em;
-    width: 50vw;
+    /* min-width: 30em; */
+    width: 92vw;
     padding:1em;
     overflow-y: auto;
 }
-.profile-column:last-child{
+/* .profile-column:last-child{
     background-color: #907bdb;
     flex-shrink: 2;
     align-items:flex-start
-}
+} */
 
 .avatar-profile{
     width:15em;
@@ -36,8 +40,7 @@
 
 .label-profile{
     display:flex;
-    align-self: flex-start;
-    justify-self: flex-start;
+
     border-bottom: 0.01em solid #907bdb;
     width:25em;
     margin-left: 0.5em;
@@ -45,24 +48,35 @@
     text-align:left;
     color:#9064c2;
 }
-.profile-column:last-child > .label-profile{
+.content-profile .plus-icon{
+    color:#9064c2;
+    padding:0;
+    margin:0.2em 0 0.2em 0.7em;
+    width:1em;
+    height:1em;
+}
+/* .profile-column:last-child > .label-profile{
     color:white;
     border-bottom-color: white;
     margin:1em;
-}
+} */
 .bio{
     padding:1em 0;
     word-wrap: normal;
     text-align: left;
     font-size:0.8em;
 }
+.profile-events-container{
+    display:flex;
+    flex-wrap: wrap;
+}
 .activity{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     margin:0.5em 0.5em 0.5em 1em;
-    align-self: flex-start;
-    color: white;
+
+    color: #907bdb;
     font-size:1.2em;
 }
 .activity label{

@@ -4,6 +4,7 @@ import '../../styles/sign-in-up.css';
 import '../../styles/index.css';
 import axios from "axios";
 import {Link} from 'react-router-dom'
+import {useLocation} from "react-router-dom";
 
 const SignUp = () => {
 
@@ -11,6 +12,8 @@ const SignUp = () => {
         validateCriteriaMode: "all",
         mode: "onSubmit"
     });
+    const [error,setError] =useState();
+    let location = useLocation();
 
     
 
@@ -20,12 +23,11 @@ const SignUp = () => {
         .then(function(response){
             console.log(response);
             if(response.status === 200){
-                localStorage.setItem('token',response.data)
-                alert("Login sucessfully!");
+                localStorage.setItem('token',response.data);               
             }
         })
         .catch(function(error){
-            alert(error);
+            setError("invalid Credentials");
         });
         
 
@@ -34,6 +36,7 @@ const SignUp = () => {
 
     return (
         <form className='form-sign' onSubmit = {handleSubmit(submitPost)}>
+            <h6> {error}</h6>
                    
         <input {...register("email", {required: true, pattern: /\S+@\S+\.\S+/})} type='text' placeholder='Email*'></input>
         {errors.email && errors.email.type === "required"  && <h6>this field is required</h6>}
@@ -44,8 +47,10 @@ const SignUp = () => {
         <input {...register("password", {required: true})} type='password' placeholder='Password*'></input>
         {errors.password && errors.password.type === "required"  && <h6>this field is required</h6>}
 
-
-        <button  type="submit" className='btn-submit-sign'>SIGN IN</button>
+        
+            <button  type="submit" className='btn-submit-sign'>SIGN IN</button>
+        
+        
 
 
     </form>

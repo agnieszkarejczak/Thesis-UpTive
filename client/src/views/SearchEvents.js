@@ -39,6 +39,7 @@ const SearchEvents = () => {
     return (
         
         <div className='content content-search'>
+            <input></input>
            
             {events?.events.map(e => { 
                 return <EventSearch 

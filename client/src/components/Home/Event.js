@@ -50,7 +50,8 @@ const Event = (props) => {
             <button className='btn-progress' onClick={accept}>Accept</button>
             <button className='btn-progress' onClick={reject}>Reject</button>
 
-            <img className='avatar-search' src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
+            <img className='avatar-search' title={props.participant.userDetails.name+" "+props.participant.userDetails.surname} 
+             src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
         </div>
     )
 }

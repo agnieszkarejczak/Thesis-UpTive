@@ -8,8 +8,8 @@ const Activity = (props) => {
             <FaVolleyballBall/>
             <label>{props.activity}</label>
             {/* Potwierdzenie umiejetnosci przez innych? */}
-            <FaRegStar />
-            <p>12</p>
+            {/* <FaRegStar />
+            <p>12</p> */}
         </div>
     )
 }

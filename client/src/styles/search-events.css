@@ -92,3 +92,11 @@
     font-size:0.5em;
     
 }
+.content-search>input{
+    padding-left:0.5em;
+    margin: 0.5em 0 0 1em;
+    width:90vw;
+    height:3em;
+    border-radius: 0.5em;
+    border: 0.1em solid #907bdb;
+}

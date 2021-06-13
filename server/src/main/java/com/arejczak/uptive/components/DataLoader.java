@@ -69,9 +69,18 @@ public class DataLoader implements ApplicationRunner {
         userService.addUser(new UserRegisterRequestDTO("email2@gmail.com","password","Alicja","Kowal","user"));
         userService.addUser(new UserRegisterRequestDTO("email3@gmail.com","password","Piotr","Matysek","user"));
         userService.addUser(new UserRegisterRequestDTO("email4@gmail.com","password","Karolina","Sikora","user"));
-        userService.addUser(new UserRegisterRequestDTO("email5@gmail.com","password","Aleksandra","Koza","user"));
+        userService.addUser(new UserRegisterRequestDTO("email5@gmail.com","password","Aleksander","Koza","user"));
         userService.addUser(new UserRegisterRequestDTO("email6@gmail.com","password","Milena","Matyszczuk","user"));
-        userService.addUser(new UserRegisterRequestDTO("janek@gmail.com","password","Jan","Anys","admin"));
+        userService.addUser(new UserRegisterRequestDTO("janek@gmail.com","password","Jan","Dubik","admin"));
+    }
+    private void changeUsersDetails(){
+        userService.changeUserDetails(1,"av1.png","My super bio");
+        userService.changeUserDetails(2,"av2.png","My super bio");
+        userService.changeUserDetails(3,"av3.png","My super bio");
+        userService.changeUserDetails(4,"av4.png","My super bio");
+        userService.changeUserDetails(5,"av5.png","My super bio");
+        userService.changeUserDetails(6,"av6.png","My super bio");
+        userService.changeUserDetails(7,"av8.png","My super bio");
     }
     private void addEvent(){
         eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","MEDIUM","ul.Miodowa 3 ,Kraków","20-12-2021","08:00","Jakaś wiadomość",   7));
@@ -114,6 +123,7 @@ public class DataLoader implements ApplicationRunner {
         this.addActivities();
         this.addLevels();
         this.addUsers();
+        this.changeUsersDetails();
         this.addEvent();
         this.addParticipants();
         this.acceptParticipants();

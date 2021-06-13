@@ -22,7 +22,7 @@ public class EventController {
     }
 
 
-    @PreAuthorize("hasAuthority('admin')")
+//    @PreAuthorize("hasAuthority('admin')")
     @GetMapping({"","/"})
     public ResponseEntity getEvents(){
         return new ResponseEntity<>(eventService.getEvents(), HttpStatus.OK);

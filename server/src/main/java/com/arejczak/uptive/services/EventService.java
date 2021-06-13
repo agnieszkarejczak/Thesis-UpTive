@@ -60,6 +60,9 @@ public class EventService {
     public ResponseEntity addParticipant(ParticipantAddDTO participantDTO){
         Event event = eventRepository.findById((long)participantDTO.getEventId()).get();
         User user = userRepository.findById((long)participantDTO.getUserId()).get();
+        if(event.getAssignedBy().getId().equals(user.getId())){
+            return new ResponseEntity<>("You're already in this event", HttpStatus.CONFLICT);
+        }
 
         EventParticipant eventParticipant =  new EventParticipant(user, event,false);
 

@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Swal from "sweetalert2";
+import {Link} from 'react-router-dom'
 
 const EventSearch = (props) => {
 
@@ -45,17 +46,23 @@ const EventSearch = (props) => {
     return (
         <div className='event-search'>
             <div className='participants'>
-                
-            <img className='avatar-search' title={props.assignedBy.userDetails.name+" "+props.assignedBy.userDetails.surname} 
+                <Link to='/Profile'>
+                <img className='avatar-search' title={props.assignedBy.userDetails.name+" "+props.assignedBy.userDetails.surname} 
             key={props.assignedBy.id} src={"avatars/"+props.assignedBy.userDetails.avatar} alt='par'/>
+                </Link>
+                
+           
                 {
 
                     props.eventsParticipants.filter(p => p.added).map((p , index) => {
 
                             if(index < 3){
                                 // return <Avatar></Avatar>
-                                return <img title={p.participant.userDetails.name+" "+p.participant.userDetails.surname}  
-                                className='avatar-search' key={p.participant.id} src={"avatars/"+p.participant.userDetails.avatar} alt='par'/>
+                                return <Link to='/Profile'>
+                                    <img title={p.participant.userDetails.name+" "+p.participant.userDetails.surname}  
+                                    className='avatar-search' key={p.participant.id} src={"avatars/"+p.participant.userDetails.avatar} alt='par'/>
+                                </Link>
+                                
                             }
                             else if(index===3){
                                 return <div className='avatar-search'> 

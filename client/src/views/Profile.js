@@ -3,7 +3,7 @@ import {Api} from '../apiHandler/apiHandler';
 import '../styles/index.css';
 import '../styles/circles.css';
 import '../styles/profile.css';
-
+import EventSearch from '../components/SearchEvents/EventSearch'
 import Socials from '../components/Profile/Socials';
 import TopActivities from '../components/TopActivities';
 import Activity from '../components/Profile/Activity';
@@ -24,6 +24,10 @@ const Profile = () => {
     });
     const [activities, setActivities] = useState([]);
     const [changes,setChanges]=useState(0);
+    const [events, setEvents] = useState({
+        events: []
+    });
+    
 
 
 
@@ -53,7 +57,15 @@ const Profile = () => {
         .catch(error =>
             alert(error)
         );
-
+        Api.events().then(response =>{
+            if(response.status === 200){
+                setEvents({events:response.data});
+                console.log(response.data[0].eventsParticipants[0].participant.id);
+            }
+        })
+        .catch(error =>
+            console.log(error)
+        );
 
     },[changes]);
 
@@ -88,7 +100,7 @@ const Profile = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Activity added succesfully!',
-                    text:'You added ',
+                    
                     showConfirmButton: true
                 })
             }
@@ -98,7 +110,7 @@ const Profile = () => {
 
     return (
         <div className='content content-profile'>
-            <div className='profile-column'>
+            {/* <div className='profile-column'> */}
                 <img className='avatar-profile' src={"avatars/"+currentUser?.userDetails?.avatar} alt='Avatar'/>
                 <br></br>
                 <p>{currentUser?.userDetails?.name+' '+currentUser?.userDetails?.surname}</p>
@@ -111,21 +123,7 @@ const Profile = () => {
                     :
                     <h6>No bio</h6>
                 }
-                
-                <label className='label-profile'>MY CURRENT EVENTS</label>
-                
-            </div>
-            <div className='profile-column'>
-            <label className='label-profile'>TOP ACTIVITIES</label>
-                <TopActivities/>
-            <label className='label-profile'>ACTIVITIES 
-              
-
-
-                    <BsPlusSquare onClick={addActivity}/>
-
-
-            </label>
+                <label className='label-profile'>ACTIVITIES </label>
             {currentUser?.userDetails?.userActivities.length ?
             currentUser?.userDetails?.userActivities.map(a =>{
                 return <Activity
@@ -137,14 +135,45 @@ const Profile = () => {
             :
             <p>No activities added yet</p>
             }
+            <BsPlusSquare className="plus-icon" onClick={addActivity}/>
+                
+                <label className='label-profile'>MY CURRENT EVENTS</label>
+                <div className="profile-events-container">
+                {events?.events.filter(e => e.assignedBy.id === currentUser?.id).map(e => { 
+                return <EventSearch 
+                setChanges={setChanges}
+                changes={changes}
+                key={e?.id}
+                id={e?.id}
+                currentUser={currentUser?.id}
+                activity={e?.activity} 
+                assignedBy={e?.assignedBy}
+                location = {e?.location}
+                time = {e?.time}
+                date = {e?.date}
+                message = {e?.message}
+                created_at = {e?.created_at}
+                required = {e?.required}
+                eventsParticipants = {e?.eventsParticipants}
+                level = {e?.level}
+                />
+            })}
+                </div>
+                
+                
+            {/* </div> */}
+            {/* <div className='profile-column'> */}
+            {/* <label className='label-profile'>TOP ACTIVITIES</label>
+                <TopActivities/> */}
+            {/*  */}
 
-            <label className='label-profile'>ACHIEVEMENTS</label>
+            {/* <label className='label-profile'>ACHIEVEMENTS</label>
                 <Achievement/>
                 <Achievement/>
-                <Achievement/>
+                <Achievement/> */}
 
-            </div>
-        </div>
+             {/* </div> */}
+        </div> 
     )
 }
 

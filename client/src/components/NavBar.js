@@ -1,9 +1,22 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import '../styles/nav-bar.css';
 import {Api} from '../apiHandler/apiHandler';
 
 const LeftBar = () => {
+
+    const [currentUser, setCurrentUser] = useState({});
+    useEffect(()=>{
+
+        Api.me().then(response =>{
+            if(response.status === 200){
+                setCurrentUser(response.data);
+            }
+        })
+        .catch(error =>
+            console.log(error)
+        );
+    },[]);
     return (
         <div className='nav-bar'>
             <Link to='/'><img className="logo" src="logo1.png"></img></Link>
@@ -32,16 +45,20 @@ const LeftBar = () => {
                         <i class="fas fa-door-open"></i>
                     </Link>
                 </li>
-                {/* <li>
-                    < Link to='/Settings' className='bar-link'>
-                    <i class="fas fa-cog"></i>
-                    </Link>
-                </li> */}
+
                 <li>
                     < Link to='/Profile' className='bar-link'>
                         <i class="far fa-user-circle"></i>
                     </Link>   
-                </li>              
+                </li>
+                {currentUser?.role?.name === "admin" &&
+                    <li>
+                    < Link to='/Settings' className='bar-link'>
+                    <i class="fas fa-cog"></i>
+                    </Link>
+                    </li>
+                }
+                              
             </ul>
                     
             

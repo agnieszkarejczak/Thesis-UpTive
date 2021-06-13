@@ -73,6 +73,14 @@ public class UserService implements UserDetailsService{
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
+    public ResponseEntity changeUserDetails(long userId,String avatar,String bio){
+        UserDetails userDetails = userRepository.findById(userId).get().getUserDetails() ;
+        userDetails.setAvatar(avatar);
+        userDetails.setBio(bio);
+        userDetailsRepository.save(userDetails);
+        return new ResponseEntity<>(userDetails,HttpStatus.OK);
+    }
+
     public ResponseEntity addUserActivity(UserActivityDTO userActivity){
         UserDetails userDetails = userRepository.findById((long)userActivity.getUserId()).get().getUserDetails();
         userDetails.addActivity(activityRepository.findById((long)userActivity.getActivityId()).get());

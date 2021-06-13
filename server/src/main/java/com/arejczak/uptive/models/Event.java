@@ -13,7 +13,12 @@ import java.util.Set;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="event")
-@Table(name="event")
+@Table(name="event",
+        uniqueConstraints = @UniqueConstraint(
+        name = "uk_event",
+        columnNames = {"assigned_by_id","date","time","location"}
+        )
+)
 public class Event implements Serializable {
     @Id
     @SequenceGenerator(
