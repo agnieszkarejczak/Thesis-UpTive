@@ -11,6 +11,7 @@ const SearchEvents = () => {
     });
     const [currentUser, setCurrentUser] = useState({});
     const [changes,setChanges]=useState(0);
+    const [search,setSearch]=useState('');
 
 
     useEffect(()=>{
@@ -39,9 +40,10 @@ const SearchEvents = () => {
     return (
         
         <div className='content content-search'>
-            <input></input>
+            <input onChange={e=>setSearch(e.target.value)} type="text" placeholder="Search for events ..."></input>
            
-            {events?.events.map(e => { 
+            {events?.events.filter(e => search !==0 && 
+            (e?.activity.name.includes(search) || e?.location.includes(search) || e?.date.includes(search))).map(e => { 
                 return <EventSearch 
                 setChanges={setChanges}
                 changes={changes}

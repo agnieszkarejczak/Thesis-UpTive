@@ -13,20 +13,20 @@ import {BsPlusSquare} from 'react-icons/bs'
 import { IconContext } from "react-icons";
 import Swal from "sweetalert2";
 import axios from 'axios';
-
+import {useParams} from "react-router";
 
 
 const Profile = () => {
 
-    const [currentUser, setCurrentUser] = useState({
-        userId:'',
-        activityId:''
-    });
+    const [currentUser, setCurrentUser] = useState({});
+    const [profileUser,setProfileUser] = useState({})
+    const [isSame, setIsSame] = useState(false);
     const [activities, setActivities] = useState([]);
     const [changes,setChanges]=useState(0);
     const [events, setEvents] = useState({
         events: []
     });
+    const { id} = useParams();
     
 
 
@@ -46,7 +46,20 @@ const Profile = () => {
             }
         })
         .catch(error =>
-            alert(error)
+            console.log(error)
+        );
+        if(currentUser?.id==id){
+
+            setIsSame(true);
+        }
+        Api.getUser(id).then(response =>{
+            if(response.status === 200){
+                setProfileUser(response.data);
+                console.log(profileUser);
+            }
+        })
+        .catch(error =>
+            console.log(error)
         );
 
         Api.activities().then(response =>{
@@ -55,7 +68,7 @@ const Profile = () => {
             }
         })
         .catch(error =>
-            alert(error)
+            console.log(error)
         );
         Api.events().then(response =>{
             if(response.status === 200){
@@ -67,7 +80,7 @@ const Profile = () => {
             console.log(error)
         );
 
-    },[changes]);
+    },[changes, currentUser?.id,id]);
 
     function addActivity(){
         Swal.fire({
@@ -111,21 +124,21 @@ const Profile = () => {
     return (
         <div className='content content-profile'>
             {/* <div className='profile-column'> */}
-                <img className='avatar-profile' src={"avatars/"+currentUser?.userDetails?.avatar} alt='Avatar'/>
+                <img className='avatar-profile' src={"/avatars/"+profileUser?.userDetails?.avatar} alt='Avatar'/>
                 <br></br>
-                <p>{currentUser?.userDetails?.name+' '+currentUser?.userDetails?.surname}</p>
+                <p>{profileUser?.userDetails?.name+' '+profileUser?.userDetails?.surname}</p>
                 <Socials/>
                 <label className='label-profile'>BIO</label>
-                {currentUser?.userDetails?.bio ?
+                {profileUser?.userDetails?.bio ?
                     <div className='bio'>
-                    {currentUser?.userDetails?.bio}
+                    {profileUser?.userDetails?.bio}
                     </div>
                     :
                     <h6>No bio</h6>
                 }
                 <label className='label-profile'>ACTIVITIES </label>
-            {currentUser?.userDetails?.userActivities.length ?
-            currentUser?.userDetails?.userActivities.map(a =>{
+            {profileUser?.userDetails?.userActivities.length ?
+            profileUser?.userDetails?.userActivities.map(a =>{
                 return <Activity
                     key={a.id}
                     id={a.id}
@@ -135,11 +148,12 @@ const Profile = () => {
             :
             <p>No activities added yet</p>
             }
-            <BsPlusSquare className="plus-icon" onClick={addActivity}/>
+            {isSame && <BsPlusSquare className="plus-icon" onClick={addActivity}/>}
+            
                 
                 <label className='label-profile'>MY CURRENT EVENTS</label>
                 <div className="profile-events-container">
-                {events?.events.filter(e => e.assignedBy.id === currentUser?.id).map(e => { 
+                {events?.events.filter(e => e.assignedBy.id === profileUser?.id).map(e => { 
                 return <EventSearch 
                 setChanges={setChanges}
                 changes={changes}

@@ -3,6 +3,8 @@
     height: 100vh;
     text-align: center;
     background-color:#907bdbc9;
+    position: absolute;
+    left:0;
   }
 
 .logo{

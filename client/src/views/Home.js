@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react'
 
 import '../styles/index.css';
 import '../styles/home.css';
+
 import Event from '../components/Home/Event';
 import EventCal from '../components/Home/EventCal';
 import EventSearch from '../components/SearchEvents/EventSearch';
 import HomeHeader from '../components/Home/HomeHeader';
 import TopActivities from '../components/TopActivities';
 import {Api} from '../apiHandler/apiHandler';
-/*TODO Popraw routing (signInUp wyświetl bez left bar ale żeby można było przejść stamtąd do home) */
+import {Link} from 'react-router-dom'
+
 const Home = () => {
 
     const [events, setEvents] = useState({
@@ -75,6 +77,7 @@ const Home = () => {
                                     date = {e?.date}
                                     message = {e?.message}
                                     created_at = {e?.created_at}
+                                    level = {e?.level}
 
                                 />
                             
@@ -85,18 +88,28 @@ const Home = () => {
                 </div>
                 <div className='column'>
                     
-                    <div className='btn-add'>
-                        {/* <i class="fas fa-plus"></i> */}
+                    <Link to='/EventForm'  className='btn-add'>
+                        
                         ADD EVENT
-                    </div>
+                    </Link>
                     <div className='events'>
-                        {events?.events.map(e =>{
-                            if(            e?.assignedBy.id === currentUser?.id
-                                || 
-                                    (e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length !==0
-                                    && 
-                                    e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id)[0].added
-                                ))
+
+                        {events?.events
+                        .filter(e => 
+                            (e?.assignedBy.id === currentUser?.id
+                            || 
+                                (e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length !==0
+                                && 
+                                e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id)[0].added)
+                            )
+                            &&
+                            new Date(e?.date+"T"+e?.time+":00")>=Date.now()
+                            )
+                        .sort(function(a,b){
+                            // console.log(new Date(b.date+"T"+b.time+":00"));
+                            return new Date(a.date+"T"+a.time+":00")-new Date(b.date+"T"+b.time+":00");
+                        })
+                        .map(e =>{
                             return <EventCal
                             key={e?.id}
                             activity={e?.activity} 
@@ -141,10 +154,7 @@ const Home = () => {
                             />
                         })}
                     </div>
-                    <div className='top-activ'>
-                        Top Activities
-                        <TopActivities borderColor= '#907bdb' color='#907bdb' number={3}/>
-                    </div>
+                
                 </div>
             </div>
 

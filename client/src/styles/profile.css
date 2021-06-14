@@ -1,9 +1,12 @@
 .content-profile{
     flex-direction:column;
+    margin: 2em 0 4em 5em;
     align-items:center;
-    width: 92vw;
+    width: 70vw;
+    height:auto;
     padding:1em;
-    overflow-y: auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2em;
     
 }
 .profile-column{

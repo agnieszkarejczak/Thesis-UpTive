@@ -21,8 +21,6 @@ public class EventController {
         this.eventService = eventService;
     }
 
-
-//    @PreAuthorize("hasAuthority('admin')")
     @GetMapping({"","/"})
     public ResponseEntity getEvents(){
         return new ResponseEntity<>(eventService.getEvents(), HttpStatus.OK);

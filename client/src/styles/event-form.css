@@ -3,7 +3,6 @@
 }
 .form-add-event{
     margin:3em 1em;
-    width:80vw;
     display:flex;
     flex-direction:column;
     justify-content: flex-start;
@@ -19,9 +18,14 @@
 .form-add-event input{
     margin:1em;
     border-radius: 0.5em;
-    width:13em;
+    width:13.5em;
     height:2em;
     border:0.1em solid #907bdbc9;
+}
+.form-add-event input[type="text"], input[type="number"]{
+    padding-left:0.2em;
+    width:30em;
+
 }
 .form-add-event label{
     border-bottom: 0.01em solid #907bdb;

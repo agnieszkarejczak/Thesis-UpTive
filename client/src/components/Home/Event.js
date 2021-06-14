@@ -4,6 +4,8 @@ import '../../styles/search-events.css';
 import {Api} from '../../apiHandler/apiHandler';
 import axios from "axios";
 import Swal from "sweetalert2";
+import {FaRegStar,FaStar} from 'react-icons/fa'
+import { IconContext } from "react-icons";
 
 const Event = (props) => {
 
@@ -44,6 +46,20 @@ const Event = (props) => {
         <div className='event'>
             <ul>
                 <li className='li-activity-event'>{props.activity.name}</li>
+                <li className='li-activity-event'>
+                <IconContext.Provider value={{ className: 'event-level'}}>
+                        {/* Inline switch statement */}
+                    {
+                        {
+                            1: <div><FaStar/><FaRegStar/><FaRegStar/></div>,
+                            2: <div><FaStar/><FaStar/><FaRegStar/></div>,
+                            3: <div><FaStar/><FaStar/><FaStar/></div>
+                        }[props.level.id]
+                    }
+                        
+                    </IconContext.Provider>
+                </li>
+
                 <li>{props.location}</li>
                 <li>{props.date+'  '+props.time}</li>
             </ul>

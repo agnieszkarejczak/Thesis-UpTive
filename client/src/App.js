@@ -8,8 +8,9 @@ import SignInUp from './views/SignInUp';
 import NavBar from './components/NavBar';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import ProtectedRoute from "./ProtectedRoute";
+import Settings from './views/Settings';
 
-//TODO 404 should be without leftbar etc.
+
 function App() {
   return (
     <Router>
@@ -20,14 +21,15 @@ function App() {
         <NavBar />
         <div>
 
-            <Route exact path='/signInUp' component={SignInUp}/>
+            {/* <Route exact path='/signInUp' component={SignInUp}/> */}
             <ProtectedRoute auth={localStorage.getItem("token")} exact path='/home' component={Home}/>
             <ProtectedRoute auth={localStorage.getItem("token")} exact path='/'>
               <Redirect to='/home'/>
             </ProtectedRoute>
-            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/profile' component={Profile}/>
+            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/profile/:id' component={Profile}/>
             <ProtectedRoute auth={localStorage.getItem("token")} exact path='/SearchEvents' component={SearchEvents}/>
             <ProtectedRoute auth={localStorage.getItem("token")} exact path='/EventForm' component={EventForm}/>
+            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/settings' component={Settings}/>
         </div>
         
       </div>

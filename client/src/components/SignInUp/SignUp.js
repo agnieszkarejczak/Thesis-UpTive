@@ -4,6 +4,7 @@ import '../../styles/sign-in-up.css';
 import '../../styles/index.css';
 import axios from "axios";
 import {Link} from 'react-router-dom'
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 
@@ -25,10 +26,20 @@ const SignUp = () => {
 
         axios.post(`http://localhost:8080/api/users/add`, formData)
         .then(function(response){
-            alert(response);
+            Swal.fire({
+                icon: 'success',
+                title: 'Hello '+response.data.userDetails.name+' !',
+                text: 'You successfully joined our UpTive community. Now it is time to log in.',
+                showConfirmButton: true
+            })
         })
         .catch(function(error){
-            alert(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Ups! something went wrong',
+                text: 'It seems like you are already in our UpTive community. Try to log in',
+                showConfirmButton: true
+            })
         });
         
 
@@ -61,7 +72,7 @@ const SignUp = () => {
         {errors.repeatPassword && errors.repeatPassword.type === "required"  && <h6>this field is required</h6>}
         
         <br></br>
-        <input {...register("acceptRequlations", {required: true})} type='checkbox'></input>
+        <input  {...register("acceptRequlations", {required: true})} type='checkbox'></input>
         {errors.acceptRequlations && errors.acceptRequlations.type === "required"  && <h6>You must accept regulations</h6>}
         
         <br></br>

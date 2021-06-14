@@ -1,4 +1,5 @@
 import axios from "axios";
+import {useLocation} from "react-router-dom";
 
 const apiUrl = "http://localhost:8080"
 const config = {
@@ -6,6 +7,8 @@ const config = {
         Authorization: 'Bearer ' + localStorage.getItem('token')
     }
 };
+
+let location = useLocation;
 
 export class Api {
 
@@ -16,11 +19,7 @@ export class Api {
         //this.logout();
     }
 
-    //TODO logout backend
-    static logout(){
-        return this.post("/api/auth/logout")
 
-    }
 
     static checkStatus(response){
         if(response.status === 403)
@@ -65,6 +64,12 @@ export class Api {
     }
 
     //=====
+   
+    static login(body){
+        return this.post("/api/users/login",body)
+
+    }
+
     static me() {
         return this.get("/api/users/me");
     }
@@ -85,6 +90,10 @@ export class Api {
     //EventForm
     static activities(){
         return this.get("/api/activities");
+    }
+
+    static addActivity(body){
+        return this.post("/api/activities/add",body)
     }
 
     static addUserActivity(body){
