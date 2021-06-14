@@ -3,6 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
+    justify-content: center;
     padding:0 1em;
     background-color: #E6E6E6;
 }
@@ -36,12 +37,12 @@
 .avatar-search:first-child{
     border: 0.1em solid #db7b7b;
 }
-.avatar-search:hover{
-    width: 2.2em;
-    height:2.2em;
+.event-search .avatar-search:hover{
     margin-right:-0.2em;
     margin-left:0.3em;
-    border-width: 0.15em;
+}
+img:hover{
+    opacity:0.7;
 }
 .participants{
     align-self:center;

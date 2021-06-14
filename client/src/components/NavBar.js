@@ -19,7 +19,7 @@ const LeftBar = () => {
     },[]);
     return (
         <div className='nav-bar'>
-            <Link to='/'><img className="logo" src="logo1.png"></img></Link>
+            <Link to='/'><img className="logo" src="/logo1.png"></img></Link>
             
             <ul className='bar-ul'>
                 <li>< Link to='/' className='bar-link'>
@@ -41,13 +41,13 @@ const LeftBar = () => {
                     </Link>
                 </li>
                 <li>
-                    < Link to='/SignInUP' className='bar-link' onClick={Api.invalidateSession}>
+                    < a className='bar-link' onClick={Api.invalidateSession} href="/signInUp">
                         <i class="fas fa-door-open"></i>
-                    </Link>
+                    </a>
                 </li>
 
                 <li>
-                    < Link to='/Profile' className='bar-link'>
+                    < Link to={`/Profile/${currentUser?.id}`} className='bar-link'>
                         <i class="far fa-user-circle"></i>
                     </Link>   
                 </li>

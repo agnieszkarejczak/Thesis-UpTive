@@ -120,7 +120,7 @@ const EventForm = () => {
                 </IconContext.Provider> */}
                 <label>MESSAGE</label>
                 <div className= 'mess-button-container'>
-                    <textarea {...register("message")} name="message" id="message" cols='50' rows='7' ></textarea>
+                    <textarea {...register("message")} name="message" id="message" cols='55' rows='7' ></textarea>
                     
                 </div>
                 <button type="submit" className='btn-submit-add-event'>ADD EVENT</button>     

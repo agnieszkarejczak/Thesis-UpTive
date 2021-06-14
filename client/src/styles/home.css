@@ -3,14 +3,15 @@
     display:flex;
     flex-direction:column;
     width: calc(100vw-5em);
+    margin-left:5em;
 }
 .header{
     display:flex;
     flex-direction: row;
     width: calc(100vw-5em);
     min-width: 60em;
-    height: 15vh;
-    background:#ffffff;
+    height: 5vh;
+    background:#E6E6E6;
     font-family: 'Courier New', Courier, monospace;
     overflow-x: hidden;
 
@@ -19,12 +20,14 @@
 .column-header{
     display:flex;
     flex-direction:row;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     padding:0.5em 1em;
     min-width:20em;
-    width: 31vw;
+    width: 30vw;
     height:auto;
+    background-color: #E6E6E6;
+
 }
 .column-header >p{
 
@@ -36,14 +39,14 @@
     display:flex;
     flex-direction:row;
 }
-/*TODO zamien in-progress, callendar,.recommended-top-container na => column */
+
 .column, .recommended-top-container{
     display:flex;
     flex-direction:column;
     align-items: center;
     min-width: 20em;
     width: 31vw;
-    height: 85vh;
+    height: 93vh;
     background:#E6E6E6;
     overflow-y: scroll;
 }
@@ -52,8 +55,11 @@
     overflow-y: hidden;
 } 
 .recommended{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     width: 30vw;
-    height: 65vh;
+    height: 93vh;
     overflow-y: scroll;
 }
 
@@ -86,6 +92,7 @@
     border-left: 0.5em solid #907bdb;
 }
 .event>ul{
+    padding:0.2em 0 0 5em;;
     list-style-type: none;
     display: flex;
     flex-direction:column;
@@ -94,10 +101,11 @@
 
 }
 .event>ul>li{
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
-.li-activity-event{
-    font-size: 2em;
+.event>ul>li.li-activity-event{
+    font-size: 1.2em;
+    font-weight: bold;
 }
 .btn-progress{
     margin: 0.5em;
@@ -105,10 +113,15 @@
     width: 5vw;
     height:2em;
     border-radius:0.8em ;
-    background:#7B84DB;
+    background:#907bdb;
     color:white;
     font-size:0.7em;
     border:none;
+}
+.btn-progress:hover{
+    background-color:#ffffff;
+    border:0.1em solid #907bdb;
+    color: #907bdb;
 }
 
 .event-cal-container{
@@ -153,7 +166,7 @@
     font-size:0.8em;
 }
 .event-cal>p{
-    flex:1;
+    flex:2;
     padding:0 0.5em;
     font-size:0.7em;
     font-style:bold;
@@ -172,6 +185,7 @@
     border-radius:0.8em ;
     background:#7B84DB;
     color:white;
+    text-decoration: none;
 }
 .btn-add>i{
     margin:0 5em 0 1em;

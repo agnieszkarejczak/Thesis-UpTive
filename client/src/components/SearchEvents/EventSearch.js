@@ -46,9 +46,9 @@ const EventSearch = (props) => {
     return (
         <div className='event-search'>
             <div className='participants'>
-                <Link to='/Profile'>
+                <Link to={`/Profile/${props.assignedBy.id}`}>
                 <img className='avatar-search' title={props.assignedBy.userDetails.name+" "+props.assignedBy.userDetails.surname} 
-            key={props.assignedBy.id} src={"avatars/"+props.assignedBy.userDetails.avatar} alt='par'/>
+            key={props.assignedBy.id} src={"/avatars/"+props.assignedBy.userDetails.avatar} alt='par'/>
                 </Link>
                 
            
@@ -58,9 +58,9 @@ const EventSearch = (props) => {
 
                             if(index < 3){
                                 // return <Avatar></Avatar>
-                                return <Link to='/Profile'>
+                                return <Link to={`/Profile/${p.participant.id}`}>
                                     <img title={p.participant.userDetails.name+" "+p.participant.userDetails.surname}  
-                                    className='avatar-search' key={p.participant.id} src={"avatars/"+p.participant.userDetails.avatar} alt='par'/>
+                                    className='avatar-search' key={p.participant.id} src={"/avatars/"+p.participant.userDetails.avatar} alt='par'/>
                                 </Link>
                                 
                             }

@@ -10,14 +10,9 @@ const EventCal = (props) => {
                     <h4>{props.activity.name}</h4>
                     <p>{props.location}</p>
                 </div>
-                <p>
-                    {/* TODO here only day ex. 18 */}
                 {props.date} 
                 <br></br>
-                {/* TODO here only month ex. March */}
 
-                </p>          
-                {/* <i class="fas fa-home"></i> */}
 
      
             </div>

@@ -1,0 +1,66 @@
+.settings-content{
+    height: 80vh;
+    width: 70vw;
+    margin: 2em 0 4em 5em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2em;
+    text-align: start;
+}
+.settings-btn{
+    background-color: #ad9de4;
+    width:35vw;
+    height:3em;
+    border:none;
+    margin-top:0;
+    color:white;
+}
+.settings-btn:first-child{
+    border-top-left-radius: 2em;
+    border-right: 0.1em solid white;
+}
+.settings-btn:last-child{
+    border-top-right-radius: 2em;
+    border-left: 0.1em solid white;
+}
+.settings-btn:hover{
+    background-color: #bdb0e6;
+}
+.settings-content h1{
+    margin: 1em 0 1em 2em;
+    font-size:2em;
+    color:#888888;
+}
+.label-settings{
+    display:flex;
+
+    border-bottom: 0.01em solid #907bdb;
+    width:25em;
+    margin-left: 5em;
+    padding-left:1em;
+    text-align:left;
+    color:#707070;
+}
+.settings-content input{
+     margin: 2em 0 1em 6em;
+     width:31em;
+     height:2em;
+     border-radius: 0.5em;
+     padding-left:0.2em;
+     border:0.1em solid #907bdb;
+}
+
+.settings-content input[type="submit"]{
+    background-color: #c1b3ec;
+    color:white;
+    border:none
+}
+.settings-content input[type="submit"]:hover{
+    background-color: #d7cef1;
+}
+.settings-content ul{
+    list-style-type: none;
+    margin: 2em 0 1em 5em;
+    overflow-y: auto;
+    width:25em;
+    height: 40vh
+}

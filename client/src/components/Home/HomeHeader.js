@@ -7,11 +7,11 @@ const HomeHeader = (props) => {
         <div className='header'>
             <div className='column-header'>
                 <p>IN PROGRESS</p>
-                <Circle borderColor= '#907bdb' color='grey' />
+
             </div>
             <div className='column-header'>
             <p>CALLENDAR</p>
-            <Circle borderColor= '#907bdb' color='grey' number={props.callendar}/>
+
             </div>
             <div className='column-header'>
             <p>RECOMENDED</p>
