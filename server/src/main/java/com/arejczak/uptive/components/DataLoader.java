@@ -93,7 +93,9 @@ public class DataLoader implements ApplicationRunner {
         eventService.addEvent(new EventAddDTO("email6@gmail.com","Basketball","LOW"   ,"ul.Pawia 2 ,Kraków",     "2021-06-12","18:00","Jakaś wiadomość",     6));
         eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków",    "2021-06-31","18:00","Jakaś wiadomość",    6));
         eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków",    "2021-07-01","18:00","Jakaś wiadomość",    6));
+
         eventService.addEvent(new EventAddDTO("janek@gmail.com","Swimming"  ,"HARD"  ,"ul.Miodowa 1 ,Kraków",    "2021-07-12","17:00","Jakaś wiadomość",    6));
+
     }
     private void addParticipants(){
         eventService.addParticipant(new ParticipantAddDTO(1,5));

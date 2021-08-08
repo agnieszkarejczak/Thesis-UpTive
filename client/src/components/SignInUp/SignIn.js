@@ -9,6 +9,7 @@ import {Redirect} from "react-router-dom";
 import {Api} from '../../apiHandler/apiHandler';
 import Swal from "sweetalert2";
 
+
 const SignUp = () => {
 
     const {register, handleSubmit, formState: { errors } } = useForm({
@@ -27,6 +28,7 @@ const SignUp = () => {
             console.log(response);
             if(response.status === 200){
                 localStorage.setItem('token',response.data);
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Logged In!',
