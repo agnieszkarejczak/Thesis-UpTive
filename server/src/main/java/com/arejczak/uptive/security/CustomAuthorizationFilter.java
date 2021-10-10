@@ -29,7 +29,7 @@ import java.util.Map;
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(request.getServletPath().equals("/api/login/**") || request.getServletPath().equals("/users/add/**")){
+        if(request.getServletPath().equals("/api/login/**") || request.getServletPath().equals("/api/users/add/**")){
             filterChain.doFilter(request,response);
         }
         else{
@@ -37,7 +37,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
                 try{
                     String token = authorizationHeader.substring("Bearer ".length());
-                    Algorithm algorithm = Algorithm.HMAC256("secretttsecrett7".getBytes());
+                    Algorithm algorithm = Algorithm.HMAC256("my_temp_secret_before_prod".getBytes());
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
                     String username = decodedJWT.getSubject();
@@ -52,7 +52,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 }
                 catch(Exception exception){
                     log.error("Error logging in: {}",exception.getMessage());
-                    response.setHeader("error",exception.getMessage());
+                    response.setHeader("Error",exception.getMessage());
                     response.setStatus(FORBIDDEN.value());
                     Map<String,String> error = new HashMap<>();
                     error.put("error_message",exception.getMessage());

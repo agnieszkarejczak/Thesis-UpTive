@@ -2,9 +2,7 @@ package com.arejczak.uptive.configurations;
 
 import com.arejczak.uptive.security.CustomAuthenticationFilter;
 import com.arejczak.uptive.security.CustomAuthorizationFilter;
-import com.arejczak.uptive.security.JwtFilter;
 import com.arejczak.uptive.services.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,12 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-import java.util.Arrays;
-
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-
 //import static com.arejczak.uptive.security.jwt.SecurityConstants.SIGN_UP_URL;
 
 @Configuration
@@ -37,9 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private final UserService userService;
-
-//    @Autowired
-//    private JwtFilter jwtFilter;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -60,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/login/**","/users/add").permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**","/api/users/add/**").permitAll();
 //        http.authorizeRequests().antMatchers(GET,"/api/users").hasAnyAuthority("admin","user");
 //        http.authorizeRequests().antMatchers(POST,"/api/activities/add").hasAnyAuthority("admin");
         http.authorizeRequests().anyRequest().authenticated();

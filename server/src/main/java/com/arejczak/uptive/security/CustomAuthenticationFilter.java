@@ -18,13 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
@@ -51,14 +49,16 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User user = (User)authResult.getPrincipal();
-        Algorithm algorithm = Algorithm.HMAC256("secretttsecrett7".getBytes(StandardCharsets.UTF_8));
+        Algorithm algorithm = Algorithm.HMAC256("my_temp_secret_before_prod".getBytes(StandardCharsets.UTF_8));
 
-            String access_token = JWT.create().withSubject(user.getUsername())
+            String access_token = JWT.create()
+                    .withSubject(user.getUsername())
                     .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                     .withIssuer(request.getRequestURL().toString())
                     .withClaim("role", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                     .sign(algorithm);
-            String refresh_token = JWT.create().withSubject(user.getUsername())
+            String refresh_token = JWT.create()
+                    .withSubject(user.getUsername())
                     .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
                     .withIssuer(request.getRequestURL().toString())
                     .sign(algorithm);
