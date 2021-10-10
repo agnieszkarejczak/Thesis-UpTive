@@ -23,11 +23,14 @@ const SignUp = () => {
 
     const submitPost = async (formData) => {
        
-        axios.post(`http://localhost:8080/api/users/login`, formData)
+        axios.post(`http://localhost:8080/api/login`, new URLSearchParams(Object.entries(formData)).toString())
         .then(function(response){
             console.log(response);
             if(response.status === 200){
-                localStorage.setItem('token',response.data);
+                localStorage.setItem('access_token',response.data.access_token);
+                localStorage.setItem('refresh_token',response.data.refresh_token);
+                alert(response.data)
+                alert(response.data.access_token)
 
                 Swal.fire({
                     icon: 'success',

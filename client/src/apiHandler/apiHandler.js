@@ -4,7 +4,7 @@ import {useLocation} from "react-router-dom";
 const apiUrl = "http://localhost:8080"
 const config = {
     headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
+        Authorization: 'Bearer ' + localStorage.getItem('access_token')
     }
 };
 
@@ -15,7 +15,8 @@ export class Api {
     
 
     static invalidateSession(){
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         //this.logout();
     }
 
@@ -119,6 +120,10 @@ export class Api {
 
     static rejectParticipant(id){
         return this.delete(`/api/events/participant/${id}/reject`);
+    }
+
+    static connectToGoogleCal(){
+        return this.get(`/api/google`)
     }
 
 }

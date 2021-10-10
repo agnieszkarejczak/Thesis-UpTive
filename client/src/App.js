@@ -22,14 +22,14 @@ function App() {
         <div>
 
             {/* <Route exact path='/signInUp' component={SignInUp}/> */}
-            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/home' component={Home}/>
-            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/'>
+            <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/home' component={Home}/>
+            <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/'>
               <Redirect to='/home'/>
             </ProtectedRoute>
-            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/profile/:id' component={Profile}/>
-            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/SearchEvents' component={SearchEvents}/>
-            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/EventForm' component={EventForm}/>
-            <ProtectedRoute auth={localStorage.getItem("token")} exact path='/settings' component={Settings}/>
+            <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/profile/:id' component={Profile}/>
+            <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/SearchEvents' component={SearchEvents}/>
+            <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/EventForm' component={EventForm}/>
+            <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/settings' component={Settings}/>
         </div>
         
       </div>

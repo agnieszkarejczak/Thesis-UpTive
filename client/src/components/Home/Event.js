@@ -41,6 +41,7 @@ const Event = (props) => {
             console.log(error)
         );
     }
+   
 
     return (
         <div className='event'>
@@ -68,6 +69,8 @@ const Event = (props) => {
 
             <img className='avatar-search' title={props.participant.userDetails.name+" "+props.participant.userDetails.surname} 
              src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
+
+            <a  href="http://localhost:8080/api/google?redirect_uri=http://localhost:3000/oauth2/redirect">Add to Google</a>
         </div>
     )
 }
