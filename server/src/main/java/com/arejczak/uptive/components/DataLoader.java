@@ -72,6 +72,7 @@ public class DataLoader implements ApplicationRunner {
         userService.addUser(new UserRegisterRequestDTO("email5@gmail.com","password","Aleksander","Koza","user"));
         userService.addUser(new UserRegisterRequestDTO("email6@gmail.com","password","Milena","Matyszczuk","user"));
         userService.addUser(new UserRegisterRequestDTO("janek@gmail.com","password","Jan","Dubik","admin"));
+        userService.addUser(new UserRegisterRequestDTO("ann.smith.tst@gmail.com","password","Ann","Smith","admin"));
     }
     private void changeUsersDetails(){
         userService.changeUserDetails(1,"av1.png","My super bio");

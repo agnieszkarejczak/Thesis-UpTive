@@ -29,8 +29,6 @@ const SignUp = () => {
             if(response.status === 200){
                 localStorage.setItem('access_token',response.data.access_token);
                 localStorage.setItem('refresh_token',response.data.refresh_token);
-                alert(response.data)
-                alert(response.data.access_token)
 
                 Swal.fire({
                     icon: 'success',
