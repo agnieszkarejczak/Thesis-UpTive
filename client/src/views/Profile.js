@@ -48,7 +48,7 @@ const Profile = () => {
         .catch(error =>
             console.log(error)
         );
-        if(currentUser?.id==id){
+        if(currentUser?.id===id){
 
             setIsSame(true);
         }

@@ -42,7 +42,16 @@ const SearchEvents = () => {
         <div className='content content-search'>
             <input onChange={e=>setSearch(e.target.value)} type="text" placeholder="Search for events ..."></input>
            
-            {events?.events.filter(e => search !==0 && 
+            {events?.events.filter(e => 
+                            (e?.assignedBy.id !== currentUser?.id
+                            || 
+                                (e?.eventsParticipants.filter(p=>p.participant.id !== currentUser?.id).length !==0
+                                && 
+                                e?.eventsParticipants.filter(p=>p.participant.id !== currentUser?.id)[0].added)
+                            )
+                            &&
+                            new Date(e?.date+"T"+e?.time+":00")>=Date.now())
+                            .filter(e => search !==0 && 
             (e?.activity.name.includes(search) || e?.location.includes(search) || e?.date.includes(search))).map(e => { 
                 return <EventSearch 
                 setChanges={setChanges}

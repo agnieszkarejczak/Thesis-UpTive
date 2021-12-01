@@ -19,6 +19,8 @@ const Home = () => {
     const [currentUser, setCurrentUser] = useState({});
     const [changes,setChanges]=useState(0);
 
+    const userActivitiesNames=currentUser?.userDetails?.userActivities.map(a =>a.name);
+
     useEffect(()=>{
 
         Api.me().then(response =>{
@@ -60,7 +62,39 @@ const Home = () => {
             />                
             <div className='main-content'>
                 <div className='column'>
-                {events?.events.map(e =>{
+                
+
+                {events?.events
+                        .filter(e => 
+                            e?.assignedBy.id !== currentUser?.id
+                                && 
+                                e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length !==0
+                                
+                                && 
+                                e?.eventsParticipants.filter(p=>p.participant.id !== currentUser?.id)[0]?.added
+                            &&
+                            new Date(e?.date+"T"+e?.time+":00")>=Date.now()
+                            &&
+                            userActivitiesNames?.includes(e?.activity.name)
+                            ).map(e => { 
+                                return <Event
+                                setChanges={setChanges}
+                                changes={changes} 
+                                key={e.id}
+                                id={e.id}
+                                currentUser = {currentUser?.id}
+                                participant={currentUser}
+                                activity={e?.activity}
+                                location = {e?.location}
+                                time = {e?.time}
+                                date = {e?.date}
+                                message = {e?.message}
+                                created_at = {e?.created_at}
+                                level = {e?.level}
+
+                            />
+                        })}
+{events?.events.map(e =>{
                     if(e.assignedBy.id === currentUser?.id){
                         return e.eventsParticipants.filter(p => !p.added).map(p => {
        
@@ -134,7 +168,18 @@ const Home = () => {
                 </div>
                 <div className='recommended-top-container'>
                     <div className='recommended'>
-                        {events?.events.map(e => { 
+                    
+                        {events?.events
+                        .filter(e => 
+                            (e?.assignedBy.id != currentUser?.id
+                                && 
+                                e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length ===0 
+                            )
+                            &&
+                            new Date(e?.date+"T"+e?.time+":00")>=Date.now()
+                            &&
+                            userActivitiesNames?.includes(e?.activity.name)
+                            ).map(e => { 
                             return <EventSearch 
                             setChanges={setChanges}
                             changes={changes}

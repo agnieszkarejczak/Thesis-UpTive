@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import '../../styles/home.css';
 import '../../styles/search-events.css';
 import {Api} from '../../apiHandler/apiHandler';
@@ -8,6 +8,22 @@ import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
 
 const Event = (props) => {
+
+    const [currentUser, setCurrentUser] = useState({});
+
+
+    useEffect(()=>{
+
+        Api.me().then(response =>{
+            if(response.status === 200){
+                setCurrentUser(response.data);
+            }
+        })
+        .catch(error =>
+            console.log(error)
+        );
+
+    },[]);
 
     function accept(){
             Api.acceptParticipant(props.id).then(response =>{
@@ -64,11 +80,21 @@ const Event = (props) => {
                 <li>{props.location}</li>
                 <li>{props.date+'  '+props.time}</li>
             </ul>
-            <button className='btn-progress' onClick={accept}>Accept</button>
-            <button className='btn-progress' onClick={reject}>Reject</button>
+            {
+                props?.participant.id === currentUser?.id?
+                <button className='btn-progress' >Waiting for acceptance </button>:
+                <div>
+                    <button className='btn-progress' onClick={accept}>Accept</button>
+                    <button className='btn-progress' onClick={reject}>Reject</button>
+                
+                    <img className='avatar-search' title={props.participant.userDetails.name+" "+props.participant.userDetails.surname} 
+                    src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
+                </div>
 
-            <img className='avatar-search' title={props.participant.userDetails.name+" "+props.participant.userDetails.surname} 
-             src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
+
+            }
+
+
 
             <a  href="http://localhost:8080/api/google?redirect_uri=http://localhost:3000/oauth2/redirect">Add to Google</a>
         </div>

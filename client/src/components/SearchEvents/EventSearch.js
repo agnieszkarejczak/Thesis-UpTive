@@ -104,9 +104,15 @@ const EventSearch = (props) => {
             
             </div>
             
+            {console.log(props?.eventsParticipants)}
+            {console.log(props?.currentUser)}
+            {
+            props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser).length ===0 ?
             
+                <button className='request-button' onClick={onClick}>REQUEST</button> :
+                <button className='request-button'>Already Requested</button>
+            }
             
-            <button className='request-button' onClick={onClick}>REQUEST</button>
             {/* <div className='icons-bar'>
             <FaStar/><FaStar/><FaRegStar/> <FaStar/><FaStar/><FaRegStar/>
             </div> */}
