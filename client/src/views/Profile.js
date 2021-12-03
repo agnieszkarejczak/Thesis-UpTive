@@ -165,8 +165,11 @@ const Profile = () => {
                 activity={e?.activity} 
                 assignedBy={e?.assignedBy}
                 location = {e?.location}
-                time = {e?.time}
-                date = {e?.date}
+                location = {e?.location}
+                startTime = {e?.startTime}
+                startDate = {e?.startDate}
+                endTime = {e?.endTime}
+                endDate = {e?.endDate}
                 message = {e?.message}
                 created_at = {e?.created_at}
                 required = {e?.required}

@@ -68,26 +68,34 @@ const Home = () => {
                         .filter(e => 
                             e?.assignedBy.id !== currentUser?.id
                                 && 
-                                e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length !==0
+                                e?.eventsParticipants?.filter(p=>p.participant.id === currentUser?.id).length !==0
                                 
                                 && 
-                                e?.eventsParticipants.filter(p=>p.participant.id !== currentUser?.id)[0]?.added
+                                e?.eventsParticipants?.filter(p=>p.participant.id !== currentUser?.id)[0]?.added
                             &&
-                            new Date(e?.date+"T"+e?.time+":00")>=Date.now()
+                            new Date(e?.startDate+"T"+e?.startTime+":00")>=Date.now()
                             &&
                             userActivitiesNames?.includes(e?.activity.name)
-                            ).map(e => { 
+                            )
+                            .sort(function(a,b){
+                                // console.log(new Date(b.date+"T"+b.time+":00"));
+                                return new Date(a.startDate+"T"+a.startTime+":00")-new Date(b.startDate+"T"+b.startTime+":00");
+                            })
+                            .map(e => { 
                                 return <Event
                                 setChanges={setChanges}
                                 changes={changes} 
                                 key={e.id}
                                 id={e.id}
+                                assignedBy={e?.assignedBy}
                                 currentUser = {currentUser?.id}
                                 participant={currentUser}
                                 activity={e?.activity}
                                 location = {e?.location}
-                                time = {e?.time}
-                                date = {e?.date}
+                                startTime = {e?.startTime}
+                                startDate = {e?.startDate}
+                                endTime = {e?.endTime}
+                                endDate = {e?.endDate}
                                 message = {e?.message}
                                 created_at = {e?.created_at}
                                 level = {e?.level}
@@ -107,8 +115,10 @@ const Home = () => {
                                     participant={p?.participant}
                                     activity={e?.activity}
                                     location = {e?.location}
-                                    time = {e?.time}
-                                    date = {e?.date}
+                                    startTime = {e?.startTime}
+                                    startDate = {e?.startDate}
+                                    endTime = {e?.endTime}
+                                    endDate = {e?.endDate}
                                     message = {e?.message}
                                     created_at = {e?.created_at}
                                     level = {e?.level}
@@ -137,20 +147,23 @@ const Home = () => {
                                 e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id)[0].added)
                             )
                             &&
-                            new Date(e?.date+"T"+e?.time+":00")>=Date.now()
+                            new Date(e?.startDate+"T"+e?.startTime+":00")>=Date.now()
                             )
                         .sort(function(a,b){
                             // console.log(new Date(b.date+"T"+b.time+":00"));
-                            return new Date(a.date+"T"+a.time+":00")-new Date(b.date+"T"+b.time+":00");
+                            return new Date(a.startDate+"T"+a.startTime+":00")-new Date(b.startDate+"T"+b.startTime+":00");
                         })
                         .map(e =>{
                             return <EventCal
                             key={e?.id}
-                            activity={e?.activity} 
+                            activity={e?.activity}
+                            currentUser = {currentUser?.id} 
                             assignedBy={e?.assignedBy}
                             location = {e?.location}
-                            time = {e?.time}
-                            date = {e?.date}
+                            startTime = {e?.startTime}
+                            startDate = {e?.startDate}
+                            endTime = {e?.endTime}
+                            endDate = {e?.endDate}
                             message = {e?.message}
                             required = {e?.required}
                             created_at = {e?.created_at}
@@ -176,7 +189,7 @@ const Home = () => {
                                 e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length ===0 
                             )
                             &&
-                            new Date(e?.date+"T"+e?.time+":00")>=Date.now()
+                            new Date(e?.startDate+"T"+e?.startTime+":00")>=Date.now()
                             &&
                             userActivitiesNames?.includes(e?.activity.name)
                             ).map(e => { 
@@ -189,8 +202,10 @@ const Home = () => {
                             activity={e?.activity} 
                             assignedBy={e?.assignedBy}
                             location = {e?.location}
-                            time = {e?.time}
-                            date = {e?.date}
+                            startTime = {e?.startTime}
+                            startDate = {e?.startDate}
+                            endTime = {e?.endTime}
+                            endDate = {e?.endDate}
                             message = {e?.message}
                             created_at = {e?.created_at}
                             required = {e?.required}

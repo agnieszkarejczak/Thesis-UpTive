@@ -6,19 +6,25 @@ import '../styles/event-form.css';
 import {BsPlusSquare} from 'react-icons/bs'
 import { IconContext } from "react-icons";
 import Swal from "sweetalert2";
+import Autocomplete from "react-google-autocomplete";
+import {API_KEY} from '../const/const.js'
 
 
 const EventForm = () => {
 
-    const {register, handleSubmit, formState: { errors } } = useForm({
+    const {register, handleSubmit,watch,getValues, formState: { errors } } = useForm({
         validateCriteriaMode: "all",
         mode: "onSubmit"
     });
+
+    const startDate = watch("startDate");
+    const startTime = watch("startTime");
 
 
     const [activities, setActivities] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
     const [levels, setLevels] = useState([]);
+    const [location, setLocation] = useState();
 
 
         useEffect(()=>{
@@ -57,6 +63,7 @@ const EventForm = () => {
 
     const submitPost = async (formData) => {
         formData['email'] = currentUser?.email;
+        formData['location'] = location
         Api.addEvent(formData)        
         .then(function(response){
             if(response.status === 200){
@@ -84,9 +91,9 @@ const EventForm = () => {
     return (
         <div className='content content-profile' >
             <form className='form-add-event' onSubmit={handleSubmit(submitPost)}>
-                <label>GENERAL</label>
+                <label>ACTIVITY TYPE & IMPACT</label>
                 <section>
-                    <select required {...register("activity", {required: true})} >
+                    <select required {...register("activity", {required: true})}>
                         {activities[0]?.map(a=>{
                             return <option key={a.id} value={a.name}>{a.name}</option>
                         })}
@@ -98,11 +105,27 @@ const EventForm = () => {
                         })}
                     </select>
                 </section>
-                <label>LOCATION & TIME</label>
+                <label>LOCATION</label>
+                <Autocomplete 
+                  apiKey={API_KEY}
+                  onPlaceSelected={(place) => {
+                      setLocation(place.formatted_address)
+                      console.log(place)
+                  }}
+                  options={{
+                    types: ["(regions)"],
+                    componentRestrictions: { country: "pl" },
+                  }}
+                />
+                <label>START TIME</label>
                 <section>
-                    <input required {...register("location", {required: true})} type='text'></input>
-                    <input required {...register("date", {required: true})} type='date'></input>
-                    <input required {...register("time", {required: true})} type='time'></input>
+                    <input required {...register("startDate", {required: true})} type='date'></input>
+                    <input required {...register("startTime", {required: true})} type='time'></input>
+                </section>
+                <label>END TIME</label>
+                <section>
+                    <input value={getValues("startDate")} required {...register("endDate", {required: true})} type='date'></input>
+                    <input  required {...register("endTime", {required: true})} type='time'></input>
                 </section>
                 {/* <IconContext.Provider value={{ className:'plus-icon' }}>
 

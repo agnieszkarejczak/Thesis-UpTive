@@ -50,7 +50,7 @@ const SearchEvents = () => {
                                 e?.eventsParticipants.filter(p=>p.participant.id !== currentUser?.id)[0].added)
                             )
                             &&
-                            new Date(e?.date+"T"+e?.time+":00")>=Date.now())
+                            new Date(e?.startDate+"T"+e?.startTime+":00")>=Date.now())
                             .filter(e => search !==0 && 
             (e?.activity.name.includes(search) || e?.location.includes(search) || e?.date.includes(search))).map(e => { 
                 return <EventSearch 
@@ -62,8 +62,11 @@ const SearchEvents = () => {
                 activity={e?.activity} 
                 assignedBy={e?.assignedBy}
                 location = {e?.location}
-                time = {e?.time}
-                date = {e?.date}
+                location = {e?.location}
+                startTime = {e?.startTime}
+                startDate = {e?.startDate}
+                endTime = {e?.endTime}
+                endDate = {e?.endDate}
                 message = {e?.message}
                 created_at = {e?.created_at}
                 required = {e?.required}

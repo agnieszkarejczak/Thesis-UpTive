@@ -82,7 +82,7 @@ const Event = (props) => {
                 </li>
 
                 <li>{props.location}</li>
-                <li>{props.date+'  '+props.time}</li>
+                <li>{props.startDate+'  '+props.startTime}</li>
             </ul>
             {
                 props?.participant.id == currentUser?.id?
