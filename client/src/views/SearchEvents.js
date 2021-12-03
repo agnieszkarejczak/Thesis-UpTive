@@ -62,7 +62,6 @@ const SearchEvents = () => {
                 activity={e?.activity} 
                 assignedBy={e?.assignedBy}
                 location = {e?.location}
-                location = {e?.location}
                 startTime = {e?.startTime}
                 startDate = {e?.startDate}
                 endTime = {e?.endTime}

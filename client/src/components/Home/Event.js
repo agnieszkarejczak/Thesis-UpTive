@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
 import {Link} from 'react-router-dom'
+import EventFullView from '../EventFullView.js';
 
 const Event = (props) => {
 
@@ -58,14 +59,20 @@ const Event = (props) => {
             console.log(error)
         );
     }
-    const viewEvent = ()=>{
-        alert("hi")
-    }
+        const [open, setOpen] = useState(false);
+    
+        const handleClickOpen = () => {
+          setOpen(true);
+        };
+    
+        const handleClose = (value) => {
+          setOpen(false);
+        };
    
 
     return (
         <div className='event' >
-            <ul onClick={viewEvent}>
+            <ul onClick={handleClickOpen}>
                 <li className='li-activity-event'>{props.activity.name}</li>
                 <li className='li-activity-event'>
                 <IconContext.Provider value={{ className: 'event-level'}}>
@@ -99,6 +106,24 @@ const Event = (props) => {
 
 
             }
+            <EventFullView
+            open={open}
+            onClose={handleClose}
+            key                = {props?.id}
+            activity           = {props?.activity} 
+            assignedBy         = {props?.assignedBy}
+            currentUser        = {props?.currentUser}
+            location           = {props?.location}
+            startTime          = {props?.startTime}
+            startDate          = {props?.startDate}
+            endTime            = {props?.endTime}
+            endDate            = {props?.endDate}
+            message            = {props?.message}
+            required           = {props?.required}
+            created_at         = {props?.created_at}
+            eventsParticipants = {props?.eventsParticipants}
+            level              = {props?.level}
+            />
 
         </div>
     )

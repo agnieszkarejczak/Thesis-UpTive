@@ -98,6 +98,7 @@ const Home = () => {
                                 endDate = {e?.endDate}
                                 message = {e?.message}
                                 created_at = {e?.created_at}
+                                eventsParticipants = {e?.eventsParticipants}
                                 level = {e?.level}
 
                             />
@@ -111,6 +112,7 @@ const Home = () => {
                                     changes={changes} 
                                     key={p.id}
                                     id={p.id}
+                                    assignedBy={e?.assignedBy}
                                     currentUser = {currentUser?.id}
                                     participant={p?.participant}
                                     activity={e?.activity}
@@ -121,6 +123,7 @@ const Home = () => {
                                     endDate = {e?.endDate}
                                     message = {e?.message}
                                     created_at = {e?.created_at}
+                                    eventsParticipants = {e?.eventsParticipants}
                                     level = {e?.level}
 
                                 />

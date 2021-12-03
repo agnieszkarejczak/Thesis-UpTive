@@ -151,18 +151,26 @@ const EventFullView = (props) => {
             <h3>Location: <b>{props.location}</b></h3>
             <br/>
 
-            {
-            props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser ).length ===0 && props?.currentUser !== props?.assignedBy.id?
+            {/* {console.log(props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser ).length ===0)}
+            {console.log(props?.currentUser !== props?.assignedBy.id)}
+            {console.log("My"+props?.currentUser)}
+            {console.log(props?.eventsParticipants)} */}
+
+            {/* Something doesn't work */}
+            {/* {
+            props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser ).length ===0 || props?.currentUser !== props?.assignedBy.id?
             
                 <button className='request-button' onClick={onClick}>REQUEST</button> :
                 <br/>
             }
              {
-            props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser && !p.participant.added ).length !==0 && props?.currentUser !== props?.assignedBy.id?
+            props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser).length !==0 
+            && !props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser )[0].added
+            && props?.currentUser !== props?.assignedBy.id?
             
                 <button className='request-button'>Already Requested</button>:
                 <br/>
-            }
+            } */}
             <br/>
             <br/>
             <button className='request-button' onClick={addEvent}>Add To Google Calendar</button>
