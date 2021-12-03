@@ -48,10 +48,11 @@ const Profile = () => {
         .catch(error =>
             console.log(error)
         );
-        if(currentUser?.id===id){
+        if(currentUser?.id==id){
 
             setIsSame(true);
         }
+        
         Api.getUser(id).then(response =>{
             if(response.status === 200){
                 setProfileUser(response.data);
@@ -148,6 +149,7 @@ const Profile = () => {
             :
             <p>No activities added yet</p>
             }
+
             {isSame && <BsPlusSquare className="plus-icon" onClick={addActivity}/>}
             
                 

@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
+import {Link} from 'react-router-dom'
 
 const Event = (props) => {
 
@@ -57,11 +58,14 @@ const Event = (props) => {
             console.log(error)
         );
     }
+    const viewEvent = ()=>{
+        alert("hi")
+    }
    
 
     return (
-        <div className='event'>
-            <ul>
+        <div className='event' >
+            <ul onClick={viewEvent}>
                 <li className='li-activity-event'>{props.activity.name}</li>
                 <li className='li-activity-event'>
                 <IconContext.Provider value={{ className: 'event-level'}}>
@@ -81,22 +85,21 @@ const Event = (props) => {
                 <li>{props.date+'  '+props.time}</li>
             </ul>
             {
-                props?.participant.id === currentUser?.id?
-                <button className='btn-progress' >Waiting for acceptance </button>:
+                props?.participant.id == currentUser?.id?
+                <div><br/><p >Waiting for acceptance</p> </div>:
                 <div>
                     <button className='btn-progress' onClick={accept}>Accept</button>
                     <button className='btn-progress' onClick={reject}>Reject</button>
                 
-                    <img className='avatar-search' title={props.participant.userDetails.name+" "+props.participant.userDetails.surname} 
-                    src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
+                    <Link to={`/Profile/${props.participant.id}`}>
+                                    <img title={props.participant.userDetails.name+" "+props.participant.userDetails.surname}  
+                                    className='avatar-search' key={props.participant.id} src={"/avatars/"+props.participant.userDetails.avatar} alt='par'/>
+                                </Link>
                 </div>
 
 
             }
 
-
-
-            <a  href="http://localhost:8080/api/google?redirect_uri=http://localhost:3000/oauth2/redirect">Add to Google</a>
         </div>
     )
 }
