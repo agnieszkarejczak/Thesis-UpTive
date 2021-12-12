@@ -15,8 +15,10 @@ public class EventAddDTO {
     private String activity;
     private String level;
     private String location;
-    private String date;
-    private String time;
+    private String startDate;
+    private String startTime;
+    private String endDate;
+    private String endTime;
     private String message;
     private int required;
 }

@@ -48,8 +48,10 @@ public class EventService {
                         activityRepository.findByName(eventDTO.getActivity()).get(),
                         levelRepository.findByName(eventDTO.getLevel()).get(),
                         eventDTO.getLocation(),
-                        eventDTO.getDate(),
-                        eventDTO.getTime(),
+                        eventDTO.getStartDate(),
+                        eventDTO.getStartTime(),
+                        eventDTO.getEndDate(),
+                        eventDTO.getEndTime(),
                         eventDTO.getMessage(),
                         eventDTO.getRequired())
         );

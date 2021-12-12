@@ -97,6 +97,10 @@ export class Api {
         return this.post("/api/activities/add",body)
     }
 
+    static updateBio(body){
+        return this.post("/api/users/changeBio",body)
+    }
+
     static addUserActivity(body){
         return this.post("/api/users/addActivity",body)
     }

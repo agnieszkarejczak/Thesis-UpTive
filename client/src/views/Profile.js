@@ -10,6 +10,7 @@ import Activity from '../components/Profile/Activity';
 import Achievement from '../components/Profile/Achievement';
 import EventsCal from '../components/Home/EventsCal';
 import {BsPlusSquare} from 'react-icons/bs'
+import {FaRegEdit} from 'react-icons/fa'
 import { IconContext } from "react-icons";
 import Swal from "sweetalert2";
 import axios from 'axios';
@@ -83,6 +84,43 @@ const Profile = () => {
 
     },[changes, currentUser?.id,id]);
 
+    function updateBio(){
+        Swal.fire({
+            title: 'Insert your new bio',
+            input: 'textarea',
+            showCancelButton: true,
+            confirmButtonText: 'Update BIO',
+            showLoaderOnConfirm: true,
+            preConfirm: (res) =>{
+                console.log(res);
+
+                return Api.updateBio({
+                    "userId":currentUser?.id,
+                    "bio":res
+                })
+                .then(response => {
+                    if(response.status===200)
+                        return response;
+                })
+                .catch(error =>{
+                    Swal.showValidationMessage("Error")
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            if(result.isConfirmed){
+                setChanges(oldChanges => oldChanges+1);
+                console.log(result);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bio updated',
+                    
+                    showConfirmButton: true
+                })
+            }
+          })
+    }
+
     function addActivity(){
         Swal.fire({
             title: 'Choose activity that you want to add:',
@@ -137,6 +175,7 @@ const Profile = () => {
                     :
                     <h6>No bio</h6>
                 }
+                {isSame && <FaRegEdit className="plus-icon" onClick={updateBio}/>}
                 <label className='label-profile'>ACTIVITIES </label>
             {profileUser?.userDetails?.userActivities.length ?
             profileUser?.userDetails?.userActivities.map(a =>{

@@ -1,6 +1,7 @@
 package com.arejczak.uptive.services;
 
 import com.arejczak.uptive.dto.UserActivityDTO;
+import com.arejczak.uptive.dto.UserBioDTO;
 import com.arejczak.uptive.dto.UserRegisterRequestDTO;
 import com.arejczak.uptive.models.Activity;
 import com.arejczak.uptive.models.Event;
@@ -77,6 +78,13 @@ public class UserService implements UserDetailsService{
         UserDetails userDetails = userRepository.findById(userId).get().getUserDetails() ;
         userDetails.setAvatar(avatar);
         userDetails.setBio(bio);
+        userDetailsRepository.save(userDetails);
+        return new ResponseEntity<>(userDetails,HttpStatus.OK);
+    }
+
+    public ResponseEntity changeUserBIO(UserBioDTO userBioDTO){
+        UserDetails userDetails = userRepository.findById((long)userBioDTO.getUserId()).get().getUserDetails() ;
+        userDetails.setBio(userBioDTO.getBio());
         userDetailsRepository.save(userDetails);
         return new ResponseEntity<>(userDetails,HttpStatus.OK);
     }

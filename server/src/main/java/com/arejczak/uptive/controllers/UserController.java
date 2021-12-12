@@ -1,6 +1,7 @@
 package com.arejczak.uptive.controllers;
 
 import com.arejczak.uptive.dto.UserActivityDTO;
+import com.arejczak.uptive.dto.UserBioDTO;
 import com.arejczak.uptive.dto.UserRegisterRequestDTO;
 import com.arejczak.uptive.models.User;
 import com.arejczak.uptive.repositories.RoleRepository;
@@ -78,6 +79,11 @@ public class UserController {
     @PostMapping("/add")
     public ResponseEntity<?> addUser(@RequestBody UserRegisterRequestDTO user){
         return userService.addUser(user);
+    }
+
+    @PostMapping("/changeBio")
+    public ResponseEntity<?> changeUserBio(@RequestBody UserBioDTO user){
+        return userService.changeUserBIO(user);
     }
 
     @PostMapping("/addActivity")

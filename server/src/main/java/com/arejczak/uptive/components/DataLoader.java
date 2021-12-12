@@ -84,18 +84,17 @@ public class DataLoader implements ApplicationRunner {
         userService.changeUserDetails(7,"av8.png","My super bio");
     }
     private void addEvent(){
-        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","MEDIUM","ul.Miodowa 3 ,Kraków",   "2021-12-20","08:00","Jakaś wiadomość",   7));
-        eventService.addEvent(new EventAddDTO("email2@gmail.com","Swimming"  ,"LOW"   ,"ul.Majora 10 ,Kraków",   "2021-06-10","10:30","Jakaś wiadomość",   5));
-        eventService.addEvent(new EventAddDTO("email4@gmail.com","Fitness"   ,"HARD"  ,"ul.Opolska 8 ,Kraków",   "2021-06-19","17:00","Jakaś wiadomość",   3));
-        eventService.addEvent(new EventAddDTO("email5@gmail.com","Climbing"  ,"HARD"  ,"ul.Opolska 8 ,Kraków",   "2021-06-22","17:00","Jakaś wiadomość",   5));
-        eventService.addEvent(new EventAddDTO("email2@gmail.com","Volleyball","MEDIUM","ul.Warszawska 5 ,Kraków","2021-06-26","17:00","Jakaś wiadomość",6));
-        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","HARD"  ,"ul.Miodowa 3 ,Kraków",   "2021-06-30","10:30","Jakaś wiadomość",   6));
-        eventService.addEvent(new EventAddDTO("email3@gmail.com","Swimming"  ,"MEDIUM","ul.Majora 10 ,Kraków",   "2021-06-08","19:00","Jakaś wiadomość",   6));
-        eventService.addEvent(new EventAddDTO("email6@gmail.com","Basketball","LOW"   ,"ul.Pawia 2 ,Kraków",     "2021-06-12","18:00","Jakaś wiadomość",     6));
-        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków",    "2021-06-31","18:00","Jakaś wiadomość",    6));
-        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków",    "2021-07-01","18:00","Jakaś wiadomość",    6));
-
-        eventService.addEvent(new EventAddDTO("janek@gmail.com","Swimming"  ,"HARD"  ,"ul.Miodowa 1 ,Kraków",    "2021-07-12","17:00","Jakaś wiadomość",    6));
+        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","MEDIUM","ul.Miodowa 3 ,Kraków",   "2021-12-20","08:00","2021-12-20","09:00","Jakaś wiadomość",   7));
+        eventService.addEvent(new EventAddDTO("email2@gmail.com","Swimming"  ,"LOW"   ,"ul.Majora 10 ,Kraków",   "2021-12-10","10:30","2021-06-10","11:30","Jakaś wiadomość",   5));
+        eventService.addEvent(new EventAddDTO("email4@gmail.com","Fitness"   ,"HARD"  ,"ul.Opolska 8 ,Kraków",   "2021-12-19","17:00","2021-06-19","19:00","Jakaś wiadomość",   3));
+        eventService.addEvent(new EventAddDTO("email5@gmail.com","Climbing"  ,"HARD"  ,"ul.Opolska 8 ,Kraków",   "2021-12-22","17:00","2021-06-22","20:00","Jakaś wiadomość",   5));
+        eventService.addEvent(new EventAddDTO("email2@gmail.com","Volleyball","MEDIUM","ul.Warszawska 5 ,Kraków","2021-12-26","17:00","2021-06-26","13:00","Jakaś wiadomość",6));
+        eventService.addEvent(new EventAddDTO("email1@gmail.com","Volleyball","HARD"  ,"ul.Miodowa 3 ,Kraków",   "2021-12-30","10:30","2021-06-30","14:30","Jakaś wiadomość",   6));
+        eventService.addEvent(new EventAddDTO("email3@gmail.com","Swimming"  ,"MEDIUM","ul.Majora 10 ,Kraków",   "2021-12-08","19:00","2021-06-08","20:00","Jakaś wiadomość",   6));
+        eventService.addEvent(new EventAddDTO("email6@gmail.com","Basketball","LOW"   ,"ul.Pawia 2 ,Kraków",     "2021-12-12","18:00","2021-06-12","19:00","Jakaś wiadomość",     6));
+        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków",    "2021-12-31","18:00","2021-06-31","18:30","Jakaś wiadomość",    6));
+        eventService.addEvent(new EventAddDTO("email3@gmail.com","Football"  ,"HARD"  ,"ul.Lubicz 1 ,Kraków",    "2021-12-01","18:00","2021-07-01","18:50","Jakaś wiadomość",    6));
+        eventService.addEvent(new EventAddDTO("janek@gmail.com","Swimming"  ,"HARD"  ,"ul.Miodowa 1 ,Kraków",    "2021-12-12","17:00","2021-12-12","19:00","Jakaś wiadomość",    6));
 
     }
     private void addParticipants(){

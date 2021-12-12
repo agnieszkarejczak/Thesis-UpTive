@@ -127,7 +127,7 @@ const EventFullView = (props) => {
                 }
             
             </div>
-            <h3>Still required: <b>{props.required}</b></h3>
+            <h3>Still required: <b>{props.required-props.eventsParticipants.filter(p =>p.added === true).length}</b></h3>
             <br/><br/>
             <h2>General Data</h2>
             <br/>

@@ -17,8 +17,9 @@ const EventForm = () => {
         mode: "onSubmit"
     });
 
-    const startDate = watch("startDate");
-    const startTime = watch("startTime");
+    const startDateWatch = watch("startDate");
+    const startTimeWatch = watch("startTime");
+    const endDateWatch = watch("endDate");
 
 
     const [activities, setActivities] = useState([]);
@@ -124,8 +125,15 @@ const EventForm = () => {
                 </section>
                 <label>END TIME</label>
                 <section>
-                    <input value={getValues("startDate")} required {...register("endDate", {required: true})} type='date'></input>
-                    <input  required {...register("endTime", {required: true})} type='time'></input>
+                    <input  required {...register("endDate", {required: true,validate:value=>value?value>=startDateWatch:true})} type='date'></input>
+                    <input  required {...register("endTime", {required: true,validate:value=>{
+                    let sDateTime = new Date(startDateWatch+"T"+startTimeWatch+":00")
+                    let eDateTime = new Date(endDateWatch+"T"+value+":00")
+                    console.log(startDateWatch)
+                    return value?sDateTime.getTime()<=eDateTime.getTime():true
+                }})} type='time'></input>
+                                {errors.endTime && errors.endTime.type === "validate"  && <h6>Wrong Time! Event cannot start later then it ends. </h6>}
+                {errors.endDate && errors.endDate.type === "validate"  && <h6>Wrong Date! Start Date cannot be later then End Date.</h6>}
                 </section>
                 {/* <IconContext.Provider value={{ className:'plus-icon' }}>
 

@@ -102,6 +102,26 @@ img:hover{
     border: 0.1em solid #907bdb;
 }
 
+/* AddAdmins */
+.container-users{
+    display:flex;
+
+    margin:3em 4em 2em 2em;
+    padding:0.5em;
+    font-family: 'Montserrat', sans-serif;
+}
+.avatar-container{
+    width:7em;
+    height:10em;
+    text-align: center;
+}
+.container-users .avatar-search{
+    width: 8em;
+    height:8em;
+    border: 0.1em solid #907bdb;
+    margin-right:0.5em;
+
+}
 /* EventFullView */
 .event-container-full{
     margin:3em 4em 2em 2em;
