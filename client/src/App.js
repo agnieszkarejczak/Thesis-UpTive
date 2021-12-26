@@ -5,10 +5,9 @@ import Error from './views/Error';
 import SearchEvents from './views/SearchEvents';
 import EventForm from './views/EventForm';
 import SignInUp from './views/SignInUp';
-import TEST from './views/TEST';
 import NavBar from './components/NavBar';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./router/ProtectedRoute";
 import Settings from './views/Settings';
 
 
@@ -24,7 +23,6 @@ function App() {
 
             {/* <Route exact path='/signInUp' component={SignInUp}/> */}
             <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/home' component={Home}/>
-            <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/test' component={TEST}/>
             <ProtectedRoute auth={localStorage.getItem("access_token")} exact path='/'>
               <Redirect to='/home'/>
             </ProtectedRoute>

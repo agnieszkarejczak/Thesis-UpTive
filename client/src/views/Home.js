@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react'
-
 import '../styles/index.css';
 import '../styles/home.css';
-
 import Event from '../components/Home/Event';
 import EventCal from '../components/Home/EventCal';
 import EventSearch from '../components/SearchEvents/EventSearch';
 import HomeHeader from '../components/Home/HomeHeader';
-import TopActivities from '../components/TopActivities';
 import {Api} from '../apiHandler/apiHandler';
 import {Link} from 'react-router-dom'
 

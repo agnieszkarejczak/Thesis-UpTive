@@ -1,6 +1,4 @@
 import axios from "axios";
-import {useLocation} from "react-router-dom";
-
 const apiUrl = "http://localhost:8080"
 const config = {
     headers: {
@@ -8,11 +6,7 @@ const config = {
     }
 };
 
-let location = useLocation;
-
-export class Api {
-
-    
+export class Api {    
 
     static invalidateSession(){
         localStorage.removeItem('access_token');
@@ -131,12 +125,3 @@ export class Api {
     }
 
 }
-/*
-    Api.me().then(response => {
-        //obsługa jeźeli wszystko poszło ok
-        //response.status nadal może być różny od 200, więc coś poszło nie tak
-    }).catch(info => {
-        //obsługa jeżeli coś się popsuło
-    })
-
-*/

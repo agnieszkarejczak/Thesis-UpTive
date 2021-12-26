@@ -4,11 +4,7 @@ import '../styles/index.css';
 import '../styles/circles.css';
 import '../styles/profile.css';
 import EventSearch from '../components/SearchEvents/EventSearch'
-import Socials from '../components/Profile/Socials';
-import TopActivities from '../components/TopActivities';
 import Activity from '../components/Profile/Activity';
-import Achievement from '../components/Profile/Achievement';
-import EventsCal from '../components/Home/EventsCal';
 import {BsPlusSquare} from 'react-icons/bs'
 import {FaRegEdit} from 'react-icons/fa'
 import { IconContext } from "react-icons";
@@ -166,7 +162,7 @@ const Profile = () => {
                 <img className='avatar-profile' src={"/avatars/"+profileUser?.userDetails?.avatar} alt='Avatar'/>
                 <br></br>
                 <p>{profileUser?.userDetails?.name+' '+profileUser?.userDetails?.surname}</p>
-                <Socials/>
+
                 <label className='label-profile'>BIO</label>
                 {profileUser?.userDetails?.bio ?
                     <div className='bio'>
