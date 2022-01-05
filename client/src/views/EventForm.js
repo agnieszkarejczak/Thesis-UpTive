@@ -3,8 +3,6 @@ import {useForm,} from "react-hook-form";
 import {Api} from '../apiHandler/apiHandler';
 import '../styles/index.css';
 import '../styles/event-form.css';
-import {BsPlusSquare} from 'react-icons/bs'
-import { IconContext } from "react-icons";
 import Swal from "sweetalert2";
 import Autocomplete from "react-google-autocomplete";
 import {API_KEY} from '../const/const.js'

@@ -5,11 +5,10 @@ import '../styles/circles.css';
 import '../styles/profile.css';
 import EventSearch from '../components/SearchEvents/EventSearch'
 import Activity from '../components/Profile/Activity';
-import {BsPlusSquare} from 'react-icons/bs'
+import {BsPlusSquare} from 'react-icons/bs';
 import {FaRegEdit} from 'react-icons/fa'
 import { IconContext } from "react-icons";
 import Swal from "sweetalert2";
-import axios from 'axios';
 import {useParams} from "react-router";
 
 

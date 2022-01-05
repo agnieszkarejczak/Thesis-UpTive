@@ -28,7 +28,6 @@ const SearchEvents = () => {
         Api.events().then(response =>{
             if(response.status === 200){
                 setEvents({events:response.data});
-                console.log(response.data[0].eventsParticipants[0].participant.id);
             }
         })
         .catch(error =>
@@ -40,6 +39,7 @@ const SearchEvents = () => {
     return (
         
         <div className='content content-search'>
+            
             <input onChange={e=>setSearch(e.target.value)} type="text" placeholder="Search for events ..."></input>
            
             {events?.events.filter(e => 
@@ -52,7 +52,7 @@ const SearchEvents = () => {
                             &&
                             new Date(e?.startDate+"T"+e?.startTime+":00")>=Date.now())
                             .filter(e => search !==0 && 
-            (e?.activity.name.includes(search) || e?.location.includes(search) || e?.date.includes(search))).map(e => { 
+            (e?.activity?.name.includes(search) || e?.location?.includes(search) || e?.date?.includes(search))).map(e => { 
                 return <EventSearch 
                 setChanges={setChanges}
                 changes={changes}

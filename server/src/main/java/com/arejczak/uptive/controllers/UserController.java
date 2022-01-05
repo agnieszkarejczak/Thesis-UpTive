@@ -2,8 +2,8 @@ package com.arejczak.uptive.controllers;
 
 import com.arejczak.uptive.dto.UserActivityDTO;
 import com.arejczak.uptive.dto.UserBioDTO;
+import com.arejczak.uptive.dto.UserIdDTO;
 import com.arejczak.uptive.dto.UserRegisterRequestDTO;
-import com.arejczak.uptive.models.User;
 import com.arejczak.uptive.repositories.RoleRepository;
 import com.arejczak.uptive.repositories.UserDetailsRepository;
 import com.arejczak.uptive.services.UserService;
@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -73,7 +74,6 @@ public class UserController {
     @GetMapping(value = "/me")
     public ResponseEntity<?> getMe(Authentication authentication, Principal principal) {
         return  new ResponseEntity<>(userService.getMe(authentication), HttpStatus.OK);
-
     }
 
     @PostMapping("/add")
@@ -84,6 +84,12 @@ public class UserController {
     @PostMapping("/changeBio")
     public ResponseEntity<?> changeUserBio(@RequestBody UserBioDTO user){
         return userService.changeUserBIO(user);
+    }
+
+    @PreAuthorize("hasAuthority('admin')")
+    @PostMapping("/addAdmin")
+    public ResponseEntity<?> addAdmin(@RequestBody UserIdDTO userIdDTO){
+        return userService.addAdmin(userIdDTO);
     }
 
     @PostMapping("/addActivity")

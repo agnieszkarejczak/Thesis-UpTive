@@ -46,14 +46,12 @@ const EventFullView = (props) => {
                   'dateTime': props.endDate+'T'+props.endTime+':00',
                   'timeZone': 'Europe/Warsaw'
                 }
-
               }
       
               let request = gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
                 'resource': event_google,
-              })
-      
+              })      
               request.execute(eventg => {
                 window.open(eventg.htmlLink)
               })

@@ -11,14 +11,6 @@ export class Api {
     static invalidateSession(){
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        //this.logout();
-    }
-
-
-
-    static checkStatus(response){
-        if(response.status === 403)
-           this.invalidateSession();
     }
 
     //=====BASIC
@@ -40,31 +32,6 @@ export class Api {
         );
     }
 
-    static put(url,body) {
-        return axios.put(apiUrl + url,body,config)
-        .then(
-            response => {
-                return response;
-            }
-        );
-    }
-
-    static delete(url) {
-        return axios.delete(apiUrl + url,config)
-        .then(
-            response => {
-                return response;
-            }
-        );
-    }
-
-    //=====
-   
-    static login(body){
-        return this.post("/api/users/login",body)
-
-    }
-
     static me() {
         return this.get("/api/users/me");
     }
@@ -80,6 +47,11 @@ export class Api {
 
     static events() {
         return this.get("/api/events");
+    }
+    
+   
+    static login(body){
+        return this.post("api/login",body)
     }
 
     //EventForm
@@ -107,6 +79,11 @@ export class Api {
         return this.post("/api/events/add",body)
 
     }
+    static addAdmin(body){
+        return this.post("/api/users/addAdmin",body)
+
+    }  
+
     //Add participant
     static addParticipant(body){
         return this.post("/api/events/participant/add",body)
@@ -123,5 +100,28 @@ export class Api {
     static connectToGoogleCal(){
         return this.get(`/api/google`)
     }
+
+    
+    static put(url,body) {
+        return axios.put(apiUrl + url,body,config)
+        .then(
+            response => {
+                return response;
+            }
+        );
+    }
+
+    static delete(url) {
+        return axios.delete(apiUrl + url,config)
+        .then(
+            response => {
+                return response;
+            }
+        );
+    }
+
+    
+
+    //=====
 
 }

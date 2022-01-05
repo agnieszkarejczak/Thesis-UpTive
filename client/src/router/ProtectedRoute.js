@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as  Redirect, Route} from 'react-router-dom';
 
 const ProtectedRoute = ({ component: Component,auth, ...rest }) => {
   return (
