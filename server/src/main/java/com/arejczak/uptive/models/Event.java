@@ -1,5 +1,7 @@
 package com.arejczak.uptive.models;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -12,13 +14,9 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+
 @Entity(name="event")
-@Table(name="event",
-        uniqueConstraints = @UniqueConstraint(
-        name = "uk_event",
-        columnNames = {"assigned_by_id","date","time","location"}
-        )
-)
+@Table(name="event")
 public class Event implements Serializable {
     @Id
     @SequenceGenerator(
@@ -62,12 +60,20 @@ public class Event implements Serializable {
     private String location;
 
     @NotNull
-    @Column(name="date")
-    private String date;
+    @Column(name="startDate")
+    private String startDate;
 
     @NotNull
-    @Column(name="time")
-    private String time;
+    @Column(name="startTime")
+    private String startTime;
+
+    @NotNull
+    @Column(name="endDate")
+    private String endDate;
+
+    @NotNull
+    @Column(name="endTime")
+    private String endTime;
 
     @Column(name="message")
     private String message;
@@ -91,13 +97,15 @@ public class Event implements Serializable {
 //    )
 //    private Set<User> participants;
 
-    public Event(User assignedBy, Activity activity, Level level, String location, String date, String time, String message, int required) {
+    public Event(User assignedBy, Activity activity, Level level, String location, String startDate, String startTime,String endDate, String endTime, String message, int required) {
         this.assignedBy = assignedBy;
         this.activity = activity;
         this.level =level;
         this.location = location;
-        this.date = date;
-        this.time = time;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
         this.message = message;
         this.required = required;
         this.created_at = LocalDate.now();
@@ -169,20 +177,36 @@ public class Event implements Serializable {
         this.location = location;
     }
 
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getTime() {
-        return time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getMessage() {

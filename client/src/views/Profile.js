@@ -4,15 +4,10 @@ import '../styles/index.css';
 import '../styles/circles.css';
 import '../styles/profile.css';
 import EventSearch from '../components/SearchEvents/EventSearch'
-import Socials from '../components/Profile/Socials';
-import TopActivities from '../components/TopActivities';
 import Activity from '../components/Profile/Activity';
-import Achievement from '../components/Profile/Achievement';
-import EventsCal from '../components/Home/EventsCal';
-import {BsPlusSquare} from 'react-icons/bs'
-import { IconContext } from "react-icons";
+import {BsPlusSquare} from 'react-icons/bs';
+import {FaRegEdit} from 'react-icons/fa'
 import Swal from "sweetalert2";
-import axios from 'axios';
 import {useParams} from "react-router";
 
 
@@ -48,10 +43,11 @@ const Profile = () => {
         .catch(error =>
             console.log(error)
         );
-        if(currentUser?.id==id){
+        if(currentUser?.id===id){
 
             setIsSame(true);
         }
+        
         Api.getUser(id).then(response =>{
             if(response.status === 200){
                 setProfileUser(response.data);
@@ -81,6 +77,43 @@ const Profile = () => {
         );
 
     },[changes, currentUser?.id,id]);
+
+    function updateBio(){
+        Swal.fire({
+            title: 'Insert your new bio',
+            input: 'textarea',
+            showCancelButton: true,
+            confirmButtonText: 'Update BIO',
+            showLoaderOnConfirm: true,
+            preConfirm: (res) =>{
+                console.log(res);
+
+                return Api.updateBio({
+                    "userId":currentUser?.id,
+                    "bio":res
+                })
+                .then(response => {
+                    if(response.status===200)
+                        return response;
+                })
+                .catch(error =>{
+                    Swal.showValidationMessage("Error")
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            if(result.isConfirmed){
+                setChanges(oldChanges => oldChanges+1);
+                console.log(result);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bio updated',
+                    
+                    showConfirmButton: true
+                })
+            }
+          })
+    }
 
     function addActivity(){
         Swal.fire({
@@ -127,7 +160,7 @@ const Profile = () => {
                 <img className='avatar-profile' src={"/avatars/"+profileUser?.userDetails?.avatar} alt='Avatar'/>
                 <br></br>
                 <p>{profileUser?.userDetails?.name+' '+profileUser?.userDetails?.surname}</p>
-                <Socials/>
+
                 <label className='label-profile'>BIO</label>
                 {profileUser?.userDetails?.bio ?
                     <div className='bio'>
@@ -136,6 +169,7 @@ const Profile = () => {
                     :
                     <h6>No bio</h6>
                 }
+                {isSame && <FaRegEdit className="plus-icon" onClick={updateBio}/>}
                 <label className='label-profile'>ACTIVITIES </label>
             {profileUser?.userDetails?.userActivities.length ?
             profileUser?.userDetails?.userActivities.map(a =>{
@@ -148,6 +182,7 @@ const Profile = () => {
             :
             <p>No activities added yet</p>
             }
+
             {isSame && <BsPlusSquare className="plus-icon" onClick={addActivity}/>}
             
                 
@@ -163,8 +198,10 @@ const Profile = () => {
                 activity={e?.activity} 
                 assignedBy={e?.assignedBy}
                 location = {e?.location}
-                time = {e?.time}
-                date = {e?.date}
+                startTime = {e?.startTime}
+                startDate = {e?.startDate}
+                endTime = {e?.endTime}
+                endDate = {e?.endDate}
                 message = {e?.message}
                 created_at = {e?.created_at}
                 required = {e?.required}

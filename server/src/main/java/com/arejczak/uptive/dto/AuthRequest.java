@@ -1,4 +1,4 @@
-package com.arejczak.uptive.payload;
+package com.arejczak.uptive.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

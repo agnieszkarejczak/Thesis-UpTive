@@ -101,3 +101,66 @@ img:hover{
     border-radius: 0.5em;
     border: 0.1em solid #907bdb;
 }
+
+/* AddAdmins */
+.container-users{
+    display:flex;
+    flex-wrap:wrap;
+    margin:3em 4em 2em 2em;
+    padding:0.5em;
+    font-family: 'Montserrat', sans-serif;
+}
+.avatar-container{
+    width:10em;
+    height:14em;
+    text-align: center;
+}
+.container-users .avatar-search{
+    width: 8em;
+    height:8em;
+    border: 0.1em solid #907bdb;
+    margin:0;
+
+}
+
+/* EventFullView */
+.event-container-full{
+    margin:3em 4em 2em 2em;
+    padding:0.5em;
+    font-family: 'Montserrat', sans-serif;
+}
+.event-container-full .avatar-search{
+    width: 4em;
+    height:4em;
+
+    border: 0.1em solid #907bdb;
+    margin-right:0.5em;
+
+}
+.event-container-full h1{
+    font-size: 2em;
+    font-weight: 100;
+    margin: 0 0 0.5em 0;
+}
+.event-container-full h2{
+    font-size: 1.5em;
+    font-weight: 100;
+    margin: 0.2em 0;
+}
+.event-container-full h3{
+    font-size: 1.3em;
+    font-weight: 100;
+}
+.event-container-full h4{
+    font-size: 1em;
+    font-weight: 100;
+}
+
+.event-container-full .request-button{
+    min-height:2.5em;
+    min-width: 22em;
+    border-radius:0.5em;
+    border:none;
+    background-color: #907bdb;
+    color:white;
+}

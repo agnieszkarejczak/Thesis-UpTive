@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+./public/index.html
+./src/const/sensitive.js
 
 # testing
 /coverage

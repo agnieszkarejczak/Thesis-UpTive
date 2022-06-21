@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaVolleyballBall, FaRegStar} from 'react-icons/fa'
+import {FaVolleyballBall} from 'react-icons/fa'
 import '../../styles/profile.css';
 
 const Activity = (props) => {
