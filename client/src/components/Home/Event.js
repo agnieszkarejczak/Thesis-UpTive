@@ -1,13 +1,30 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import '../../styles/home.css';
 import '../../styles/search-events.css';
 import {Api} from '../../apiHandler/apiHandler';
-import axios from "axios";
 import Swal from "sweetalert2";
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
+import {Link} from 'react-router-dom'
+import EventFullView from '../EventFullView.js';
 
 const Event = (props) => {
+
+    const [currentUser, setCurrentUser] = useState({});
+
+
+    useEffect(()=>{
+
+        Api.me().then(response =>{
+            if(response.status === 200){
+                setCurrentUser(response.data);
+            }
+        })
+        .catch(error =>
+            console.log(error)
+        );
+
+    },[]);
 
     function accept(){
             Api.acceptParticipant(props.id).then(response =>{
@@ -41,10 +58,20 @@ const Event = (props) => {
             console.log(error)
         );
     }
+        const [open, setOpen] = useState(false);
+    
+        const handleClickOpen = () => {
+          setOpen(true);
+        };
+    
+        const handleClose = (value) => {
+          setOpen(false);
+        };
+   
 
     return (
-        <div className='event'>
-            <ul>
+        <div className='event' >
+            <ul onClick={handleClickOpen}>
                 <li className='li-activity-event'>{props.activity.name}</li>
                 <li className='li-activity-event'>
                 <IconContext.Provider value={{ className: 'event-level'}}>
@@ -61,13 +88,42 @@ const Event = (props) => {
                 </li>
 
                 <li>{props.location}</li>
-                <li>{props.date+'  '+props.time}</li>
+                <li>{props.startDate+'  '+props.startTime}</li>
             </ul>
-            <button className='btn-progress' onClick={accept}>Accept</button>
-            <button className='btn-progress' onClick={reject}>Reject</button>
+            {
+                props?.participant.id === currentUser?.id?
+                <div><br/><p >Waiting for acceptance</p> </div>:
+                <div>
+                    <button className='btn-progress' onClick={accept}>Accept</button>
+                    <button className='btn-progress' onClick={reject}>Reject</button>
+                
+                    <Link to={`/Profile/${props.participant.id}`}>
+                                    <img title={props.participant.userDetails.name+" "+props.participant.userDetails.surname}  
+                                    className='avatar-search' key={props.participant.id} src={"/avatars/"+props.participant.userDetails.avatar} alt='par'/>
+                                </Link>
+                </div>
 
-            <img className='avatar-search' title={props.participant.userDetails.name+" "+props.participant.userDetails.surname} 
-             src={'avatars/'+props.participant.userDetails.avatar} alt='par'/>
+
+            }
+            <EventFullView
+            open={open}
+            onClose={handleClose}
+            key                = {props?.id}
+            activity           = {props?.activity} 
+            assignedBy         = {props?.assignedBy}
+            currentUser        = {props?.currentUser}
+            location           = {props?.location}
+            startTime          = {props?.startTime}
+            startDate          = {props?.startDate}
+            endTime            = {props?.endTime}
+            endDate            = {props?.endDate}
+            message            = {props?.message}
+            required           = {props?.required}
+            created_at         = {props?.created_at}
+            eventsParticipants = {props?.eventsParticipants}
+            level              = {props?.level}
+            />
+
         </div>
     )
 }

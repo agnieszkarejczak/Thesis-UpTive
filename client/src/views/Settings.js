@@ -1,5 +1,5 @@
 import '../styles/settings.css';
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import EditForm from '../components/Settings/EditForm';
 import AddAdmins from '../components/Settings/AddAdmins';
 

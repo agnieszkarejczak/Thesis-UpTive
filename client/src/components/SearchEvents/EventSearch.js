@@ -1,17 +1,24 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import '../../styles/search-events.css';
 import Circle from '../Circle';
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
 import {Api} from '../../apiHandler/apiHandler';
-import axios from "axios";
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Swal from "sweetalert2";
 import {Link} from 'react-router-dom'
+import EventFullView from '../EventFullView.js';
 
 const EventSearch = (props) => {
+
+    const [open, setOpen] = useState(false);
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (value) => {
+      setOpen(false);
+    };
 
 
     const addParticipant ={
@@ -76,7 +83,7 @@ const EventSearch = (props) => {
                     })
                 }
             </div>
-            <div className='event-search-info'>
+            <div className='event-search-info' onClick={handleClickOpen}>
             <ul>
                 <li className='li-activity'>
                     {props.activity.name} 
@@ -94,7 +101,7 @@ const EventSearch = (props) => {
                     
                 </li>
                 <li>{props.location} </li>
-                <li>{props.date}  {props.time}</li>
+                <li>{props.startDate}  {props.startTime}</li>
             </ul>
             {props.required?
             <Circle borderColor= '#907bdb' color='#907bdb' number={props.required-props.eventsParticipants.filter(p =>p.added === true).length} />
@@ -104,12 +111,36 @@ const EventSearch = (props) => {
             
             </div>
             
+            {console.log(props?.eventsParticipants)}
+            {console.log(props?.currentUser)}
+            {
+            props?.eventsParticipants.filter(p=>p.participant.id === props?.currentUser).length ===0 ?
             
+                <button className='request-button' onClick={onClick}>REQUEST</button> :
+                <button className='request-button'>Already Requested</button>
+            }
             
-            <button className='request-button' onClick={onClick}>REQUEST</button>
             {/* <div className='icons-bar'>
             <FaStar/><FaStar/><FaRegStar/> <FaStar/><FaStar/><FaRegStar/>
             </div> */}
+            <EventFullView
+            open={open}
+            onClose={handleClose}
+            key                = {props?.id}
+            activity           = {props?.activity} 
+            assignedBy         = {props?.assignedBy}
+            currentUser        = {props?.currentUser}
+            location           = {props?.location}
+            startTime          = {props?.startTime}
+            startDate          = {props?.startDate}
+            endTime            = {props?.endTime}
+            endDate            = {props?.endDate}
+            message            = {props?.message}
+            required           = {props?.required}
+            created_at         = {props?.created_at}
+            eventsParticipants = {props?.eventsParticipants}
+            level              = {props?.level}
+            />
             
         </div>
     )
