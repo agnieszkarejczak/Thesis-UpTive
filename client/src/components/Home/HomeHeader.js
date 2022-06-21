@@ -1,6 +1,5 @@
 import React from 'react'
 import '../../styles/home.css';
-import Circle from '../Circle';
 
 const HomeHeader = (props) => {
     return (

@@ -184,7 +184,7 @@ const Home = () => {
                     
                         {events?.events
                         .filter(e => 
-                            (e?.assignedBy.id != currentUser?.id
+                            (e?.assignedBy.id !== currentUser?.id
                                 && 
                                 e?.eventsParticipants.filter(p=>p.participant.id === currentUser?.id).length ===0 
                             )

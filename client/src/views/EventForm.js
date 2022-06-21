@@ -10,7 +10,7 @@ import {API_KEY} from '../const/const.js'
 
 const EventForm = () => {
 
-    const {register, handleSubmit,watch,getValues, formState: { errors } } = useForm({
+    const {register, handleSubmit,watch, formState: { errors } } = useForm({
         validateCriteriaMode: "all",
         mode: "onSubmit"
     });

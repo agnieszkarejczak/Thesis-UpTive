@@ -7,7 +7,6 @@ import EventSearch from '../components/SearchEvents/EventSearch'
 import Activity from '../components/Profile/Activity';
 import {BsPlusSquare} from 'react-icons/bs';
 import {FaRegEdit} from 'react-icons/fa'
-import { IconContext } from "react-icons";
 import Swal from "sweetalert2";
 import {useParams} from "react-router";
 
@@ -44,7 +43,7 @@ const Profile = () => {
         .catch(error =>
             console.log(error)
         );
-        if(currentUser?.id==id){
+        if(currentUser?.id===id){
 
             setIsSame(true);
         }
@@ -198,7 +197,6 @@ const Profile = () => {
                 currentUser={currentUser?.id}
                 activity={e?.activity} 
                 assignedBy={e?.assignedBy}
-                location = {e?.location}
                 location = {e?.location}
                 startTime = {e?.startTime}
                 startDate = {e?.startDate}

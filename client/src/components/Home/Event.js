@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import '../../styles/home.css';
 import '../../styles/search-events.css';
 import {Api} from '../../apiHandler/apiHandler';
-import axios from "axios";
 import Swal from "sweetalert2";
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
@@ -92,7 +91,7 @@ const Event = (props) => {
                 <li>{props.startDate+'  '+props.startTime}</li>
             </ul>
             {
-                props?.participant.id == currentUser?.id?
+                props?.participant.id === currentUser?.id?
                 <div><br/><p >Waiting for acceptance</p> </div>:
                 <div>
                     <button className='btn-progress' onClick={accept}>Accept</button>

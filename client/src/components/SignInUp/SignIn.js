@@ -1,10 +1,9 @@
-import React, {useEffect,useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {useForm,} from "react-hook-form";
 import '../../styles/sign-in-up.css';
 import '../../styles/index.css';
 import axios from "axios";
 import Swal from "sweetalert2";
-import {Api} from '../../apiHandler/apiHandler';
 
 
 const SignUp = () => {

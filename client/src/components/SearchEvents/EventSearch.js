@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import '../../styles/search-events.css';
 import Circle from '../Circle';
 import {FaRegStar,FaStar} from 'react-icons/fa'

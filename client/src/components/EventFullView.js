@@ -1,16 +1,9 @@
 import React from 'react'
-
-import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-
 import {Link} from 'react-router-dom'
 import '../styles/search-events.css';
-
 import {FaRegStar,FaStar} from 'react-icons/fa'
 import { IconContext } from "react-icons";
-import Circle from './Circle';
-import Swal from "sweetalert2";
-import {Api} from '../apiHandler/apiHandler';
 import {API_KEY,CLIENT_ID,DISCOVERY_DOCS,SCOPES} from '../const/const.js'
 
 const EventFullView = (props) => {
@@ -63,37 +56,7 @@ const EventFullView = (props) => {
     const handleClose = () => {
       props.onClose(props.selectedValue);
     };
-  
-    const handleListItemClick = (value) => {
-      props.onClose(value);
-    };
 
-    const addParticipant ={
-        userId: props.currentUser,
-        eventId: props.id
-    };
-    const onClick = ()=>{
-        Api.addParticipant(addParticipant).then(response =>{
-            if(response.status === 200){
-                props.setChanges(oldChange => oldChange+1);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Request sent!',
-                    showConfirmButton: true
-                })
-
-            }
-        })
-        .catch(error =>
-            Swal.fire({
-                icon: 'error',
-                title: 'Ups! something went wrong',
-                text:'You cannot send request to this event',
-                showConfirmButton: true
-            })
-            
-        );    
-    };
     return (
         <Dialog 
             onClose={handleClose}

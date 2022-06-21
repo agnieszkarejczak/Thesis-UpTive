@@ -19,7 +19,7 @@ const LeftBar = () => {
     },[]);
     return (
         <div className='nav-bar'>
-            <Link to='/'><img className="logo" src="/logo1.png"></img></Link>
+            <Link to='/'><img className="logo" src="/logo1.png" alt="logo"></img></Link>
             
             <ul className='bar-ul'>
                 <li>< Link to='/' className='bar-link'>
